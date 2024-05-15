@@ -11,6 +11,14 @@ public indirect enum EnumListNode<T> {
         self = .value(value, next: nil)
     }
     
+    /// Initializes using the provided `value` and optional `next` node.
+    /// - Parameters:
+    ///   - value: The node's value.
+    ///   - next: The node's optional pointer to the next node.
+    public init(_ value: T, next: EnumListNode<T>? = nil) {
+        self = .value(value, next: next)
+    }
+    
     // MARK: - API
     /// This node's current value.
     public var currentValue: T {
