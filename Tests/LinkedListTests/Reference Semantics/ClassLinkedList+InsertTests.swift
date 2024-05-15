@@ -75,17 +75,81 @@ final class ClassLinkedList_InsertTests: XCTestCase {
     /// Validates that `insert(_:at:)` can insert into the middle of the list.
     func test_insertAt_middle() throws {
         let expectedValue = fixture.randomNumber
+        let numbers = fixture.randomNumbers()
+
+        let index = numbers.count / 2
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: index)
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        sut.insert(expectedValue, at: index)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:after:)` can insert into an empty list.
+    func test_insertAfter_empty() throws {
+        let expectedValue = fixture.randomNumber
+        let bogusNode = fixture.makeBogusListNode()
+        let sut = fixture.makeEmptyListSUT()
+        try sut.insert(expectedValue, after: bogusNode)
+        XCTAssertEqual(sut.head?.value, expectedValue)
+    }
+    
+    /// Validates that `insert(_:after:)` can insert into the head of the list.
+    func test_insertAfter_head() throws {
+        let expectedValue = fixture.randomNumber
+        print("expectedValue: \(expectedValue)")
+        let numbers = fixture.randomNumbers()
+        print("      numbers: \(numbers)")
+
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: 1)
+        print("expectedArray: \(expectedArray)")
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let head = try XCTUnwrap(sut.head)
+        try sut.insert(expectedValue, after: head)
+        print("  sut.asArray: \(sut.asArray)")
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:after:)` can insert at the tail of the list.
+    func test_insertAfter_tail() throws {
+        let expectedValue = fixture.randomNumber
+        print("expectedValue: \(expectedValue)")
+        let numbers = fixture.randomNumbers()
+        print("      numbers: \(numbers)")
+
+        var expectedArray = numbers
+        expectedArray.append(expectedValue)
+        print("expectedArray: \(expectedArray)")
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let tail = try XCTUnwrap(sut.tail)
+        //print("         tail: \(tail.value)")
+        try sut.insert(expectedValue, after: tail)
+        print("  sut.asArray: \(sut.asArray)")
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:after:)` can insert into the middle of the list.
+    func test_insertAfter_middle() throws {
+        let expectedValue = fixture.randomNumber
         print("expectedValue: \(expectedValue)")
         let numbers = fixture.randomNumbers()
         print("      numbers: \(numbers)")
 
         let index = numbers.count / 2
+        //print("        index: \(index)")
+        print("   numbers[\(index)]: \(numbers[index])")
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: index)
         print("expectedArray: \(expectedArray)")
         
         let sut = fixture.makeListSUT(numbers: numbers)
-        sut.insert(expectedValue, at: index)
+        let middle = try XCTUnwrap(sut.node(at: index))
+        print("      middle: \(middle.value)")
+        try sut.insert(expectedValue, after: middle)
         print("  sut.asArray: \(sut.asArray)")
         XCTAssertEqual(sut.asArray, expectedArray)
     }

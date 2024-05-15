@@ -38,4 +38,8 @@ extension LinkedListFixture {
         }
         return sut
     }
+    
+    func makeBogusListNode() -> ListNode<Int> {
+        makeListNodeSUT(value: bogusNumber)
+    }
 }

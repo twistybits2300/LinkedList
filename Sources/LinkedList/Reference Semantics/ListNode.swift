@@ -18,3 +18,10 @@ public final class ListNode<T> {
         self.next = next
     }
 }
+
+extension ListNode: Equatable where T: Equatable {
+    public static func ==(left: ListNode, right: ListNode) -> Bool {
+        return left.value == right.value
+        && left.next == right.next
+    }
+}
