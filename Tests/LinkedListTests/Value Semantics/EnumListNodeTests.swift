@@ -302,16 +302,54 @@ final class EnumListNodeTests: XCTestCase {
         var sut = fixture.makeSUT()
         XCTAssertThrowsError(try sut.remove(at: index))
     }
-
-    // MARK: - Utilities
-    private func debug(_ sut: EnumListNode<Int>) {
-        var currentNode: EnumListNode? = sut
-        while currentNode?.next != nil {
-            if let node = currentNode {
-                print("  \(node.currentValue)")
-            }
-            currentNode = currentNode?.next
-        }
+    
+    /// Validates that `remove(node:)` correctly removes the head node.
+    func test_removeNode_head() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedArray = Array(numbers.dropFirst())
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.remove(node: sut)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(node:)` throws an error when trying to remove the
+    /// head node in a list with only one node.
+    func test_removeNode_head_failure() throws {
+        var sut = fixture.makeSUT(nodeCount: 1)
+        XCTAssertThrowsError(try sut.remove(node: sut))
+    }
+    
+    /// Validates that `remove(node:)` can successfuly remove the tail of the list.
+    func test_removeNode_tail()  throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count - 1
+        let expectedArray = Array(numbers.dropLast())
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        let tail = try XCTUnwrap(sut.node(at: index))
+        try sut.remove(node: tail)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(node:)` can successfuly remove the middle of the list.
+    func test_removeNode_middle()  throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        var expectedArray = numbers
+        expectedArray.remove(at: index)
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        let tail = try XCTUnwrap(sut.node(at: index))
+        try sut.remove(node: tail)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(node:)` throws an error when given a node
+    /// that is not in the list
+    func test_removeNode_failure() throws {
+        var sut = fixture.makeSUT()
+        let bogusNode = EnumListNode(fixture.bogusNumber)
+        XCTAssertThrowsError(try sut.remove(node: bogusNode))
     }
 }
 
@@ -334,19 +372,3 @@ private extension LinkedListFixture {
         return sut
     }
 }
-//
-//private extension EnumListNode {
-//    var asArray: [T] {
-//        var working = [T]()
-//        var currentNode: EnumListNode? = self
-//        
-//        while currentNode != nil {
-//            if let value = currentNode?.currentValue {
-//                working.append(value)
-//            }
-//            currentNode = currentNode?.next
-//        }
-//        
-//        return working
-//    }
-//}

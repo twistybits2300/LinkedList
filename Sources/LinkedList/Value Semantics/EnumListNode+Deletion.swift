@@ -16,7 +16,6 @@ extension EnumListNode {
         
         while let currentNode = current {
             if count == index {
-                //if let previousNode = previous {
                 if previous != nil {
                     if currentNode.next == nil {
                         /* currentNode is the tail of the list */
@@ -45,5 +44,49 @@ extension EnumListNode {
         
         /* if we made it to here it means the index was not valid */
         throw LinkedListError.invalidIndex(index)
+    }
+}
+
+extension EnumListNode where T : Equatable {
+    /// Removes the given `node` from this list.
+    /// - Parameter node: The node to be removed.
+    /// - Throws: `LinkedListError.unableToRemoveNode` when attempting to remove
+    /// the head node in a single-node list.
+    public mutating func remove(node: EnumListNode<T>) throws {
+        var current: EnumListNode<T>? = self
+        var list = EnumListNode(currentValue)
+        
+        while let currentNode = current {
+            if self == node {
+                /* remove the head of the list */
+                if let nextNode = currentNode.next {
+                    self = nextNode
+                    return
+                } else {
+                    throw LinkedListError.unableToRemoveNode
+                }
+            } else if currentNode.next == node {
+                print("         list: \(list.asArray)")
+                print("     removing: \(node.currentValue)")
+                if currentNode.next?.next == nil {
+                    /* we're at the tail of the list */
+                    self = list
+                    return
+                } else {
+                    /* we're between the head & tail of the list */
+                    list.append(contentsOf: currentNode.next?.next)
+                    self = list
+                    return
+                }
+            }
+            
+            current = currentNode.next
+            
+            if let value = current?.currentValue {
+                list.insert(value)
+            }
+        }
+        
+        throw LinkedListError.unknownNode
     }
 }
