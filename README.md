@@ -37,7 +37,7 @@ Reference and value semantics implementations of a linked list.
     - [x] `isEmpty() -> Bool`: Checks if the list is empty.
 
 8. **Reverse**:
-    - [ ] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.
+    - [x] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.
 
 9. **Copy**:
     - [ ] `copy() -> ListNode<T>`: Creates a copy of the list, ensuring modifications on the copy do not affect the original list, relevant for linked lists implemented with reference semantics (like in classes).
