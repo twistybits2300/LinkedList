@@ -18,4 +18,30 @@ extension ClassLinkedList {
             self.head = node
         }
     }
+    
+    public func insert(_ value: T, at index: Int) {
+        let newNode = ListNode(value)
+        
+        if let head = self.head {
+            if index <= 0 {
+                /* insert at head */
+                newNode.next = self.head
+                self.head = newNode
+            } else {
+                var currentNode = head
+                var count = 0
+                
+                while let nextNode = currentNode.next, count < index - 1 {
+                    currentNode = nextNode
+                    count += 1
+                }
+                
+                newNode.next = currentNode.next
+                currentNode.next = newNode
+            }
+        } else {
+            /* list is empty */
+            head = newNode
+        }
+    }
 }
