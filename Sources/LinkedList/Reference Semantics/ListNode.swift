@@ -6,7 +6,7 @@ public final class ListNode<T> {
     public private(set) var value: T
     
     /// The pointer to the next node in the list.
-    public private(set) var next: ListNode<T>?
+    public var next: ListNode<T>?
     
     // MARK: - Initialization
     /// Initializes using the provided `value` and optional `next` node.

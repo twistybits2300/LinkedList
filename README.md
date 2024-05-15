@@ -5,8 +5,8 @@ Reference and value semantics implementations of a linked list.
 ### Reference semantics to do
 ```swift
 1. **Initialization**:
-    - [ ] `init(_ value: T)`: Initializes a new node with the given value.
-    - [ ] `init(_ value: T, next: ListNode?)`: Optionally, initializes a new node with the given value and a reference to the next node.
+    - [x] `init(_ value: T)`: Initializes a new node with the given value.
+    - [x] `init(_ value: T, next: ListNode?)`: Optionally, initializes a new node with the given value and a reference to the next node.
 
 2. **Insertion**:
     - [ ] `insert(_ value: T)`: Inserts a new node at the end of the list.
