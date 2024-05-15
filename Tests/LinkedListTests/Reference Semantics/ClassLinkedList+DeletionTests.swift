@@ -294,4 +294,29 @@ final class ClassLinkedList_DeletionTests: XCTestCase {
         XCTAssertEqual(sut.tail?.value, expectedTailValue)
         XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
+    
+    /// Validates that `removeAll()` does nothing with an empty list.
+    func test_removeAll_empty() throws {
+        let sut = fixture.makeEmptyListSUT()
+        sut.removeAll()
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+    }
+    
+    /// Validates that `removeAll()` leaves an empty list when removing the only node of a one-node
+    /// list.
+    func test_removeAll_one_node() throws {
+        let sut = fixture.makeListSUT(nodeCount: 1)
+        sut.removeAll()
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+    }
+    
+    /// Validates that `removeAll()` removes all of the nodes in the list.
+    func test_removeAll() throws {
+        let sut = fixture.makeListSUT()
+        sut.removeAll()
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+    }
 }
