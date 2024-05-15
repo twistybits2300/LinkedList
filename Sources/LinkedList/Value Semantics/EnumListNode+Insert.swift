@@ -16,8 +16,8 @@ extension EnumListNode {
     /// - Parameters:
     ///   - value: The value to be inserted.
     ///   - index: The index of where to insert the value.
-    ///  - Throws: `LinkedListError.invalidIndex(index)` if the end of the list is reached
-    ///  before the given `index`.
+    ///  - Throws: `LinkedListError.invalidIndex(index)` if the end of the list 
+    ///  is reached before the given `index`.
     public mutating func insert(_ value: T, at index: Int) throws {
         self = try self.inserting(value, at: index)
     }
@@ -38,7 +38,7 @@ extension EnumListNode {
     }
 }
 
-extension EnumListNode where T : Equatable {
+extension EnumListNode where T: Equatable {
     /// Inserts the given `value` after the provided `afterNode`. `T` must be `Equatable`.
     /// - Parameters:
     ///   - value: The value to be inserted.
