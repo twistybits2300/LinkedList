@@ -22,8 +22,8 @@ extension ClassLinkedList {
                 /* this is a list with a single node */
                 self.tail = head?.next
             }
-            self.head = head?.next
             
+            self.head = head?.next
             return
         }
         
@@ -51,5 +51,49 @@ extension ClassLinkedList {
         
         /* the given index isn't valid */
         throw LinkedListError.invalidIndex(index)
+    }
+    
+    /// Removes the given `node` from the list.
+    /// - Parameter node: The node to be removed.
+    /// - Throws: `LinkedListError`
+    /// `LinkedListErrors` thrown:
+    /// - `unableToRemoveNode` if the list is empty
+    /// - `.unknownNode` if `node` isn't in the list.
+    public func remove(node: ListNode<T>) throws {
+        guard head != nil else {
+            throw LinkedListError.unableToRemoveNode
+        }
+        
+        if node === head {
+            /* we'll be removing the head */
+            if head === tail {
+                /* this is a list with a single node */
+                self.tail = head?.next
+            }
+            
+            self.head = head?.next
+            return
+        }
+        
+        var previousNode = head
+
+        while let nextNode = previousNode?.next {
+            if nextNode === node {
+                if nextNode.next == nil {
+                    /* we're at the tail */
+                    previousNode?.next = nil
+                    self.tail = previousNode
+                    return
+                }
+                
+                /* we're removing `previousNode` */
+                previousNode?.next = nextNode.next
+                return
+            }
+            
+            previousNode = nextNode
+        }
+        
+        throw LinkedListError.unknownNode
     }
 }
