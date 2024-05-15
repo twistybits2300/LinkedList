@@ -35,4 +35,15 @@ public indirect enum EnumListNode<T> {
             return next
         }
     }
+    
+    /// Inserts the given `value` at the end of the list.
+    /// - Parameter value: The value to be inserted.
+    public mutating func insert(_ value: T) {
+        if var nextNode = self.next {
+            nextNode.insert(value)
+            self = .value(currentValue, next: nextNode)
+        } else {
+            self = .value(currentValue, next: .value(value, next: nil))
+        }
+    }
 }
