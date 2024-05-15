@@ -57,7 +57,6 @@ public indirect enum EnumListNode<T> {
         self = try self.inserting(value, at: index)
     }
     
-    // MARK: - Utilities
     private func inserting(_ value: T, at index: Int) throws -> Self {
         let next = self.next
         if index == 0 {
@@ -70,6 +69,33 @@ public indirect enum EnumListNode<T> {
         } else {
             /* we're at the end of the list before reaching the index, throw an error */
             throw LinkedListError.invalidIndex(index)
+        }
+    }
+}
+
+extension EnumListNode: Equatable where T : Equatable {
+    public static func ==(left: EnumListNode, right: EnumListNode) -> Bool {
+        return left.currentValue == right.currentValue
+    }
+    
+    /// Inserts the given `value` after the provided `afterNode`. `T` must be `Equatable`.
+    /// - Parameters:
+    ///   - value: The value to be inserted.
+    ///   - afterNode: The node after which the value will be inserted.
+    /// - Throws: `LinkedListError.unknownNode` if the provided `afterNode` is not
+    /// in the list.
+    public mutating func insert(_ value: T, after afterNode: EnumListNode<T>) throws {
+        self = try self.inserting(value, after: afterNode)
+    }
+    
+    private func inserting(_ value: T, after afterNode: EnumListNode<T>) throws -> EnumListNode<T> {
+        if self == afterNode {
+            return .init(currentValue, next: .value(value, next: self.next))
+        } else if let next = self.next {
+            let nextNode = try next.inserting(value, after: afterNode)
+            return .init(currentValue, next: nextNode)
+        } else {
+            throw LinkedListError.unknownNode
         }
     }
 }

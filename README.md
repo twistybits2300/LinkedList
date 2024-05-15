@@ -10,8 +10,8 @@ Reference and value semantics implementations of a linked list.
 
 2. **Insertion**:
     - [x] `insert(_ value: T)`: Inserts a new node at the end of the list.
-    - [ ] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
-    - [ ] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
+    - [x] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
+    - [x] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
     - [ ] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
 
 3. **Deletion**:
@@ -22,7 +22,6 @@ Reference and value semantics implementations of a linked list.
 
 4. **Traversal**:
     - [ ] `traverse()`: Visits each node of the list, often used for printing all values.
-    - [ ] `reverseTraverse()`: Optionally, traverses the nodes in reverse order, useful in doubly linked lists.
 
 5. **Searching**:
     - [ ] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
@@ -49,8 +48,8 @@ Reference and value semantics implementations of a linked list.
     - [x] `init(_ value: T, next: ListNode?)`: Optionally, initializes a new node with the given value and a reference to the next node.
 
 2. **Insertion**:
-    - [ ] `insert(_ value: T)`: Inserts a new node at the end of the list.
-    - [ ] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
+    - [x] `insert(_ value: T)`: Inserts a new node at the end of the list.
+    - [x] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
     - [ ] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
     - [ ] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
 

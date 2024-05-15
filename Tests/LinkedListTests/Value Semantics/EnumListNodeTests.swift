@@ -90,7 +90,6 @@ final class EnumListNodeTests: XCTestCase {
         var currentNode = sut
         for i in 0..<index + 1 {
             if i == index {
-                let result = currentNode.currentValue == randomNumber
                 XCTAssertEqual(currentNode.currentValue, randomNumber)
             }
             currentNode = try XCTUnwrap(currentNode.next)
@@ -105,6 +104,47 @@ final class EnumListNodeTests: XCTestCase {
         
         let randomNumber = fixture.randomNumber
         XCTAssertThrowsError(try sut.insert(randomNumber, at: index))
+    }
+    
+    /// Validates that `insert(_:after)` works as expected when the `afterNode` is
+    /// the node under test..
+    func test_insertAfter_node_is_afterNode() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedValue = fixture.randomNumber
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: 1)
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.insert(expectedValue, after: sut)
+        
+        let resultArray = sut.asArray
+        XCTAssertEqual(resultArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:after:)` correctly handles inserting after a node
+    /// that's not the node under test.
+    func test_insertAfter_recursive() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedValue = fixture.randomNumber
+        var expectedArray = numbers
+        let index = numbers.count / 2
+        expectedArray.insert(expectedValue, at: index + 1)
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        XCTAssertEqual(sut.asArray, numbers)
+        
+        let afterNode = try XCTUnwrap(sut.node(at: index))
+        try sut.insert(expectedValue, after: afterNode)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:at:)` throws an error when given an invalid `index`.
+    func test_insertAfter_throws() throws {
+        let bogusNode = EnumListNode(fixture.bogusNumber)
+        var sut = fixture.makeSUT()
+        
+        let randomNumber = fixture.randomNumber
+        XCTAssertThrowsError(try sut.insert(randomNumber, after: bogusNode))
     }
 
     // MARK: - Utilities
@@ -125,7 +165,10 @@ private struct Default {
 
 private extension LinkedListFixture {
     func makeSUT(nodeCount: Int = Default.nodeCount) -> EnumListNode<Int> {
-        let numbers = self.randomNumbers(count: nodeCount)
+        makeSUT(numbers: self.randomNumbers(count: nodeCount))
+    }
+    
+    func makeSUT(numbers: [Int]) -> EnumListNode<Int> {
         var sut = EnumListNode(numbers[0])
         
         for number in numbers.dropFirst() {
@@ -133,5 +176,36 @@ private extension LinkedListFixture {
         }
         
         return sut
+    }
+}
+
+private extension EnumListNode {
+    var asArray: [T] {
+        var working = [T]()
+        var currentNode: EnumListNode? = self
+        
+        while currentNode != nil {
+            if let value = currentNode?.currentValue {
+                working.append(value)
+            }
+            currentNode = currentNode?.next
+        }
+        
+        return working
+    }
+    
+    func node(at index: Int) -> EnumListNode<T>? {
+        var currentNode: EnumListNode<T>? = self
+        var count = 0
+        
+        while count <= index, currentNode != nil {
+            if count == index {
+                return currentNode
+            }
+            count = count + 1
+            currentNode = currentNode?.next
+        }
+        
+        return nil
     }
 }
