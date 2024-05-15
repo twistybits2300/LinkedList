@@ -257,6 +257,51 @@ final class EnumListNodeTests: XCTestCase {
         let sut = EnumListNode(expectedValue)
         XCTAssertEqual(sut.count, 1)
     }
+    
+    /// Validates that `remove(at:)` can successfully remove the head of the list.
+    func test_removeAt_head() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedArray = Array(numbers.dropFirst())
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.remove(at: 0)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(at:)` can successfully remove the tail of the list.
+    func test_removeAt_tail() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count - 1
+        let expectedArray = Array(numbers.dropLast())
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.remove(at: index)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(at:)` can successfully remove the middle of the list.
+    func test_removeAt_middle() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        var expectedArray = numbers
+        expectedArray.remove(at: index)
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.remove(at: index)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `remove(at:)` throws an error when given an invalid `index`.
+    func test_removeAt_failure_too_bit() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count + 1
+        var sut = fixture.makeSUT(numbers: numbers)
+        XCTAssertThrowsError(try sut.remove(at: index))
+    }
+    
+    /// Validates that `remove(at:)` throws an error when given an invalid `index`.
+    func test_removeAt_failure_less_than_zero() throws {
+        let index = -1
+        var sut = fixture.makeSUT()
+        XCTAssertThrowsError(try sut.remove(at: index))
+    }
 
     // MARK: - Utilities
     private func debug(_ sut: EnumListNode<Int>) {
@@ -289,19 +334,19 @@ private extension LinkedListFixture {
         return sut
     }
 }
-
-private extension EnumListNode {
-    var asArray: [T] {
-        var working = [T]()
-        var currentNode: EnumListNode? = self
-        
-        while currentNode != nil {
-            if let value = currentNode?.currentValue {
-                working.append(value)
-            }
-            currentNode = currentNode?.next
-        }
-        
-        return working
-    }
-}
+//
+//private extension EnumListNode {
+//    var asArray: [T] {
+//        var working = [T]()
+//        var currentNode: EnumListNode? = self
+//        
+//        while currentNode != nil {
+//            if let value = currentNode?.currentValue {
+//                working.append(value)
+//            }
+//            currentNode = currentNode?.next
+//        }
+//        
+//        return working
+//    }
+//}

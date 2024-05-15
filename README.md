@@ -24,7 +24,6 @@ Reference and value semantics implementations of a linked list.
 
 5. **Utility**:
     - [x] `count() -> Int`: Returns the number of nodes in the list.
-    - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
 
 6. **Deletion**:
     - [ ] `remove(at index: Int)`: Removes the node at a specific index.
