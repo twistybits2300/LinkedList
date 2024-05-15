@@ -38,11 +38,7 @@ extension EnumListNode {
     }
 }
 
-extension EnumListNode: Equatable where T : Equatable {
-    public static func ==(left: EnumListNode, right: EnumListNode) -> Bool {
-        return left.currentValue == right.currentValue
-    }
-    
+extension EnumListNode where T : Equatable {
     /// Inserts the given `value` after the provided `afterNode`. `T` must be `Equatable`.
     /// - Parameters:
     ///   - value: The value to be inserted.
