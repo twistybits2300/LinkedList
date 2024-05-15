@@ -35,6 +35,23 @@ extension ClassLinkedList {
         return foundNode
     }
     
+    /// Returns the number of nodes currently in the list.
+    public var count: Int {
+        guard head != nil else {
+            return 0
+        }
+        
+        var count = 0
+        
+        func counter(node: ListNode<T>) {
+            count += 1
+        }
+        
+        traverse(visit: counter(node:))
+        
+        return count
+    }
+    
     var asArray: [T] {
         guard let head = head else {
             return []

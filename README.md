@@ -30,7 +30,7 @@ Reference and value semantics implementations of a linked list.
     - [x] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
 
 6. **Access**:
-    - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
+    - [x] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
 7. **Utility**:
     - [ ] `count() -> Int`: Returns the number of nodes in the list.

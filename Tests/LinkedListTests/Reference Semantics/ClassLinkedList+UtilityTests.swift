@@ -67,6 +67,20 @@ final class ClassLinkedList_UtilityTests: XCTestCase {
         XCTAssertEqual(foundNode.value, expectedValue)
     }
     
+    /// Validates that `count` returns zero when the list is empty.
+    func test_count_empty() throws {
+        let sut = fixture.makeEmptyListSUT()
+        XCTAssertEqual(sut.count, 0)
+    }
+    
+    /// Validates that `count` returns the expected value.
+    func test_count() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedCount = numbers.count
+        let sut = fixture.makeListSUT(numbers: numbers)
+        XCTAssertEqual(sut.count, expectedCount)
+    }
+    
     // MARK: - Utilities
     private func nodeVisitor(node: ListNode<Int>) {
         didCallVisitor = true
