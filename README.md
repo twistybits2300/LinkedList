@@ -2,7 +2,7 @@
 
 Reference and value semantics implementations of a linked list.
 
-### Reference semantics to do
+### Reference semantics features
 ```swift
 1. **Initialization**:
     - [x] `init(_ value: T)`: Initializes a new node with the given value.
@@ -41,10 +41,33 @@ Reference and value semantics implementations of a linked list.
 
 9. **Copy**:
     - [ ] `copy() -> ListNode<T>`: Creates a copy of the list, ensuring modifications on the copy do not affect the original list, relevant for linked lists implemented with reference semantics (like in classes).
-
 ```
 
-### Value semantics to do
+#### Doubly-linked list
+```swift
+1. **Initialization**
+    - [x] `init()`
+    - [x] `init(head:tail:)`
+
+2. **Utility**
+    - [x] `isEmpty: Bool`
+    - [x] `first: T?`
+    - [x] `last: T?`
+    - [x] `contains(node: DoublyLinkedNode<T>) -> Bool`
+
+3. **Insertion**:
+    - [x] `prepend(_: T)`: adds the value to the front of the list
+    - [x] `append(_: T)`: adds the value to the back of the list
+
+4. **Deletion**:
+    - [x] `remove(_:DoublyLinkedNode<T>) -> T?`
+
+5. **Sequence**:
+    - [x] `DoublyLinkedListIterator<T>`
+    - [x] `makeIterator() -> DoublyLinkedListIterator<T>`
+```
+
+### Value semantics features
 ```swift
 1. **Initialization**:
     - [x] `init(_ value: T)`: Initializes a new node with the given value.
