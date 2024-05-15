@@ -9,7 +9,7 @@ final class ListNodeTests: XCTestCase {
     /// Validates that `init(value:)` correctly captures the given `value`.
     func test_init_captures_value() throws {
         let expectedValue = fixture.randomNumber
-        let sut = ListNode(value: expectedValue)
+        let sut = ListNode(expectedValue)
         XCTAssertEqual(sut.value, expectedValue)
         XCTAssertNil(sut.next)
     }
@@ -17,10 +17,10 @@ final class ListNodeTests: XCTestCase {
     /// Validates that `init(value:next:)` captures the given `next` node.
     func test_init_captures_next() throws {
         let nextNodeValue = fixture.randomNumber
-        let nextNode = ListNode(value: nextNodeValue)
+        let nextNode = ListNode(nextNodeValue)
         
         let expectedValue = fixture.randomNumber
-        let sut = ListNode(value: expectedValue, next: nextNode)
+        let sut = ListNode(expectedValue, next: nextNode)
         XCTAssertEqual(sut.value, expectedValue)
         XCTAssertEqual(sut.next?.value, nextNodeValue)
     }
@@ -28,7 +28,7 @@ final class ListNodeTests: XCTestCase {
 
 extension LinkedListFixture {
     func makeListNodeSUT(value: Int) -> ListNode<Int> {
-        ListNode(value: value)
+        ListNode(value)
     }
     
     func makeListNodeSUT(nodeCount: Int = Default.nodeCount) -> ListNode<Int> {
@@ -36,11 +36,11 @@ extension LinkedListFixture {
     }
     
     func makeListNodeSUT(numbers: [Int]) -> ListNode<Int> {
-        let sut = ListNode(value: numbers[0])
+        let sut = ListNode(numbers[0])
         let remainingNumbers = Array(numbers.dropFirst())
         
         for number in remainingNumbers {
-            sut.insert(number)
+            sut.append(number)
         }
         
         return sut

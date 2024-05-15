@@ -13,7 +13,7 @@ public final class ListNode<T> {
     /// - Parameters:
     ///   - value: The node's value.
     ///   - next: The optional pointer to the next node. Defaults to `nil`.
-    public init(value: T, next: ListNode<T>? = nil) {
+    public init(_ value: T, next: ListNode<T>? = nil) {
         self.value = value
         self.next = next
     }
