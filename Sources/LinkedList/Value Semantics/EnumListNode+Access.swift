@@ -1,8 +1,22 @@
 import Foundation
 
 extension EnumListNode {
-    /// Returns the first node in the list.
+    /// Returns the first node in the list, staring with this node.
     var first: EnumListNode<T>? {
         self
+    }
+    
+    /// Returns the last node in the list, starting with this node.
+    var last: EnumListNode<T>? {
+        var current: EnumListNode<T>? = self
+        
+        while let currentNode = current {
+            if currentNode.next == nil {
+                return currentNode
+            }
+            current = currentNode.next
+        }
+        
+        return nil
     }
 }

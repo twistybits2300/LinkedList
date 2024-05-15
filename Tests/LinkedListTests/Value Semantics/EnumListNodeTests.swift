@@ -212,6 +212,16 @@ final class EnumListNodeTests: XCTestCase {
         let firstNumber = try XCTUnwrap(sut.first?.currentValue)
         XCTAssertEqual(firstNumber, expectedValue)
     }
+    
+    /// Validates that `last` returns the last node in the list.
+    func test_last()  throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count - 1
+        let expectedValue = numbers[index]
+        let sut = fixture.makeSUT(numbers: numbers)
+        let lastNumber = try XCTUnwrap(sut.last?.currentValue)
+        XCTAssertEqual(lastNumber, expectedValue)
+    }
 
     // MARK: - Utilities
     private func debug(_ sut: EnumListNode<Int>) {

@@ -19,7 +19,7 @@ Reference and value semantics implementations of a linked list.
 
 4. **Access**:
     - [x] `first() -> ListNode<T>?`: Returns the first node of the list.
-    - [ ] `last() -> ListNode<T>?`: Returns the last node of the list.
+    - [x] `last() -> ListNode<T>?`: Returns the last node of the list.
     - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
 5. **Utility**:
