@@ -188,6 +188,21 @@ final class EnumListNodeTests: XCTestCase {
         let randomNumber = fixture.randomNumber
         XCTAssertThrowsError(try sut.insert(randomNumber, before: bogusNode))
     }
+    
+    /// Validates that `traverse(visit:)` visits each node in the list.
+    func test_traverse() throws {
+        let expectedArray = fixture.randomNumbers()
+        var receivedNumbers = [Int]()
+        
+        func visitor(node: EnumListNode<Int>) {
+            receivedNumbers.append(node.currentValue)
+        }
+        
+        let sut = fixture.makeSUT(numbers: expectedArray)
+        sut.traverse(visit: visitor)
+        
+        XCTAssertEqual(receivedNumbers, expectedArray)
+    }
 
     // MARK: - Utilities
     private func debug(_ sut: EnumListNode<Int>) {
