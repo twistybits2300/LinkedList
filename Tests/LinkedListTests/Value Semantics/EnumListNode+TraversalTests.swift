@@ -15,7 +15,7 @@ final class EnumListNode_TraversalTests: XCTestCase {
             receivedNumbers.append(node.currentValue)
         }
         
-        let sut = fixture.makeNodeSUT(numbers: expectedArray)
+        let sut = fixture.makeEnumNodeSUT(numbers: expectedArray)
         sut.traverse(visit: visitor)
         
         XCTAssertEqual(receivedNumbers, expectedArray)

@@ -45,7 +45,7 @@ final class EnumListNode_InsertTests: XCTestCase {
     
     /// Validates that `insert(_:at:)` correctly handles inserting at the head of the list.
     func test_insert_at_head() throws {
-        var sut = fixture.makeNodeSUT()
+        var sut = fixture.makeEnumNodeSUT()
         let expectedValue = sut.currentValue
         
         let randomNumber = fixture.randomNumber
@@ -57,7 +57,7 @@ final class EnumListNode_InsertTests: XCTestCase {
     /// Validates that `insert(_:at:)` works as expected when inserting recursively at a point
     /// that's not the head of the list and for which there is a `next` node.
     func test_insert_at_recursive() throws {
-        var sut = fixture.makeNodeSUT()
+        var sut = fixture.makeEnumNodeSUT()
         let index = 2
         XCTAssertLessThan(index, Default.nodeCount)
         
@@ -75,7 +75,7 @@ final class EnumListNode_InsertTests: XCTestCase {
     
     /// Validates that `insert(_:at:)` throws an error when given an invalid `index`.
     func test_insert_throws() throws {
-        var sut = fixture.makeNodeSUT()
+        var sut = fixture.makeEnumNodeSUT()
         let index = Default.nodeCount + 1
         XCTAssertGreaterThan(index, Default.nodeCount)
         
@@ -91,7 +91,7 @@ final class EnumListNode_InsertTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: 1)
         
-        var sut = fixture.makeNodeSUT(numbers: numbers)
+        var sut = fixture.makeEnumNodeSUT(numbers: numbers)
         try sut.insert(expectedValue, after: sut)
         
         let resultArray = sut.asArray
@@ -107,7 +107,7 @@ final class EnumListNode_InsertTests: XCTestCase {
         let index = numbers.count / 2
         expectedArray.insert(expectedValue, at: index + 1)
         
-        var sut = fixture.makeNodeSUT(numbers: numbers)
+        var sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertEqual(sut.asArray, numbers)
         
         let afterNode = try XCTUnwrap(sut.node(at: index))
@@ -117,8 +117,8 @@ final class EnumListNode_InsertTests: XCTestCase {
     
     /// Validates that `insert(_:after:)` throws an error when given an invalid `index`.
     func test_insertAfter_throws() throws {
-        let bogusNode = fixture.makeBogusNode()
-        var sut = fixture.makeNodeSUT()
+        let bogusNode = fixture.makeEnumBogusNode()
+        var sut = fixture.makeEnumNodeSUT()
         
         let randomNumber = fixture.randomNumber
         XCTAssertThrowsError(try sut.insert(randomNumber, after: bogusNode))
@@ -132,7 +132,7 @@ final class EnumListNode_InsertTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: 0)
         
-        var sut = fixture.makeNodeSUT(numbers: numbers)
+        var sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let beforeNode = try XCTUnwrap(sut.node(at: 1))
         try sut.insert(expectedValue, before: beforeNode)
         
@@ -149,7 +149,7 @@ final class EnumListNode_InsertTests: XCTestCase {
         let index = numbers.count / 2
         expectedArray.insert(expectedValue, at: index - 1)
         
-        var sut = fixture.makeNodeSUT(numbers: numbers)
+        var sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertEqual(sut.asArray, numbers)
         
         let beforeNode = try XCTUnwrap(sut.node(at: index))
@@ -159,8 +159,8 @@ final class EnumListNode_InsertTests: XCTestCase {
     
     /// Validates that `insert(_:before:)` throws an error when given an invalid `index`.
     func test_insertBefore_throws() throws {
-        let bogusNode = fixture.makeBogusNode()
-        var sut = fixture.makeNodeSUT()
+        let bogusNode = fixture.makeEnumBogusNode()
+        var sut = fixture.makeEnumNodeSUT()
         
         let randomNumber = fixture.randomNumber
         XCTAssertThrowsError(try sut.insert(randomNumber, before: bogusNode))

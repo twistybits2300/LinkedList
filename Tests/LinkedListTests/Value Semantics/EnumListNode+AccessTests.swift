@@ -10,7 +10,7 @@ final class EnumListNode_AccessTests: XCTestCase {
     func test_first() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = numbers[0]
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let firstNumber = try XCTUnwrap(sut.first?.currentValue)
         XCTAssertEqual(firstNumber, expectedValue)
     }
@@ -20,7 +20,7 @@ final class EnumListNode_AccessTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count - 1
         let expectedValue = numbers[index]
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let lastNumber = try XCTUnwrap(sut.last?.currentValue)
         XCTAssertEqual(lastNumber, expectedValue)
     }
@@ -30,7 +30,7 @@ final class EnumListNode_AccessTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let returnedNode = try sut.node(at: index)
         XCTAssertEqual(returnedNode.currentValue, expectedValue)
     }
@@ -39,7 +39,7 @@ final class EnumListNode_AccessTests: XCTestCase {
     func test_nodeAt_failure() throws {
         let numbers = fixture.randomNumbers()
         let index = numbers.count + 1
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertThrowsError(try sut.node(at: index))
     }
     

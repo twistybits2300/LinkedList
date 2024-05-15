@@ -35,11 +35,11 @@ struct Default {
 }
 
 extension LinkedListFixture {
-    func makeNodeSUT(nodeCount: Int = Default.nodeCount) -> EnumListNode<Int> {
-        makeNodeSUT(numbers: self.randomNumbers(count: nodeCount))
+    func makeEnumNodeSUT(nodeCount: Int = Default.nodeCount) -> EnumListNode<Int> {
+        makeEnumNodeSUT(numbers: self.randomNumbers(count: nodeCount))
     }
     
-    func makeNodeSUT(numbers: [Int]) -> EnumListNode<Int> {
+    func makeEnumNodeSUT(numbers: [Int]) -> EnumListNode<Int> {
         var sut = EnumListNode(numbers[0])
         
         for number in numbers.dropFirst() {
@@ -49,7 +49,7 @@ extension LinkedListFixture {
         return sut
     }
     
-    func makeBogusNode() -> EnumListNode<Int> {
+    func makeEnumBogusNode() -> EnumListNode<Int> {
         EnumListNode(bogusNumber)
     }
 }

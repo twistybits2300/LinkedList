@@ -9,7 +9,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     /// Validates that `find(:)` returns `nil` if the value isn't in the list.
     func test_find_failure() throws {
         let numbers = fixture.randomNumbers()
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertNil(sut.find(fixture.bogusNumber))
     }
     
@@ -18,7 +18,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     func test_find_head() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = try XCTUnwrap(numbers.first)
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let result = try XCTUnwrap(sut.find(_: expectedValue))
         XCTAssertEqual(result.currentValue, expectedValue)
     }
@@ -29,7 +29,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let result = try XCTUnwrap(sut.find(_: expectedValue))
         XCTAssertEqual(result.currentValue, expectedValue)
     }
@@ -39,7 +39,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     func test_find_tail() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = try XCTUnwrap(numbers.last)
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         let result = try XCTUnwrap(sut.find(_: expectedValue))
         XCTAssertEqual(result.currentValue, expectedValue)
     }
@@ -47,7 +47,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     /// Validates that `contains(:)` returns `false` if the value isn't in the list.
     func test_contains_failure() throws {
         let numbers = fixture.randomNumbers()
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertFalse(sut.contains(fixture.bogusNumber))
     }
 
@@ -56,7 +56,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     func test_contains_head() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = try XCTUnwrap(numbers.first)
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertTrue(sut.contains(_: expectedValue))
     }
 
@@ -66,7 +66,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertTrue(sut.contains(_: expectedValue))
     }
 
@@ -75,7 +75,7 @@ final class EnumListNode_SearchingTests: XCTestCase {
     func test_contains_tail() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = try XCTUnwrap(numbers.last)
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertTrue(sut.contains(_: expectedValue))
     }
 }

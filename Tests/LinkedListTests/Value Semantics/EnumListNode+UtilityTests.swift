@@ -11,7 +11,7 @@ final class EnumListNode_UtilityTests: XCTestCase {
     func test_count_multiple_nodes() throws {
         let numbers = fixture.randomNumbers()
         let expectedCount = numbers.count
-        let sut = fixture.makeNodeSUT(numbers: numbers)
+        let sut = fixture.makeEnumNodeSUT(numbers: numbers)
         XCTAssertEqual(sut.count, expectedCount)
     }
     
@@ -35,7 +35,7 @@ final class EnumListNode_UtilityTests: XCTestCase {
     func test_reverse() throws {
         let numbers = fixture.randomNumbers()
         let expectedArray = Array(numbers.reversed())
-        var sut = fixture.makeNodeSUT(numbers: numbers)
+        var sut = fixture.makeEnumNodeSUT(numbers: numbers)
         sut.reverse()
         XCTAssertEqual(sut.asArray, expectedArray)
     }

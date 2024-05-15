@@ -37,7 +37,7 @@ final class EnumLinkedListTests: XCTestCase {
     func test_head() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = numbers[0]
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let sut = EnumLinkedList(node: headNode)
         XCTAssertEqual(sut.head?.currentValue, expectedValue)
     }
@@ -53,7 +53,7 @@ final class EnumLinkedListTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count - 1
         let expectedValue = numbers[index]
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let sut = EnumLinkedList(node: headNode)
         XCTAssertEqual(sut.tail?.currentValue, expectedValue)
     }
@@ -67,7 +67,7 @@ final class EnumLinkedListTests: XCTestCase {
     /// Validates that `count` returns the expected value.
     func test_count() throws {
         let numbers = fixture.randomNumbers()
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let sut = EnumLinkedList(node: headNode)
         XCTAssertEqual(sut.count, numbers.count)
     }
@@ -80,7 +80,7 @@ final class EnumLinkedListTests: XCTestCase {
     
     /// Validates that `isEmpty` returns the expected value.
     func test_isEmpty_false() throws {
-        let sut = fixture.makeListSUT()
+        let sut = fixture.makeEnumListSUT()
         XCTAssertFalse(sut.isEmpty)
     }
     
@@ -96,7 +96,7 @@ final class EnumLinkedListTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let sut = EnumLinkedList(node: headNode)
         XCTAssertEqual(try sut.node(at: index)?.currentValue, expectedValue)
     }
@@ -112,7 +112,7 @@ final class EnumLinkedListTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let sut = fixture.makeListSUT(numbers: numbers)
+        let sut = fixture.makeEnumListSUT(numbers: numbers)
         let result = try XCTUnwrap(sut.find(_: expectedValue))
         XCTAssertEqual(result.currentValue, expectedValue)
     }
@@ -128,7 +128,7 @@ final class EnumLinkedListTests: XCTestCase {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
         let expectedValue = numbers[index]
-        let sut = fixture.makeListSUT(numbers: numbers)
+        let sut = fixture.makeEnumListSUT(numbers: numbers)
         XCTAssertTrue(sut.contains(_: expectedValue))
     }
 
@@ -145,7 +145,7 @@ final class EnumLinkedListTests: XCTestCase {
     /// nodes.
     func test_insert() throws {
         let expectedValue = fixture.randomNumber
-        var sut = fixture.makeListSUT()
+        var sut = fixture.makeEnumListSUT()
         sut.insert(expectedValue)
         let tailNode = try XCTUnwrap(sut.tail)
         XCTAssertEqual(tailNode.currentValue, expectedValue)
@@ -165,7 +165,7 @@ final class EnumLinkedListTests: XCTestCase {
     
     /// Validates that `removeAll` removes all of the nodes in a list.
     func test_removeAll() throws {
-        var sut = fixture.makeListSUT()
+        var sut = fixture.makeEnumListSUT()
         sut.removeAll()
         XCTAssertNil(sut.head)
     }
@@ -180,7 +180,7 @@ final class EnumLinkedListTests: XCTestCase {
     func test_reverse() throws {
         let numbers = fixture.randomNumbers()
         let expectedArray = Array(numbers.reversed())
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         sut.reverse()
         let headNode = try XCTUnwrap(sut.head)
         XCTAssertEqual(headNode.asArray, expectedArray)
@@ -203,7 +203,7 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: index)
         
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         try sut.insert(expectedValue, at: index)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
@@ -225,10 +225,10 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: index + 1)
         
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let afterNode = try headNode.node(at: index)
         
-        var sut = fixture.makeListSUT(node: headNode)
+        var sut = fixture.makeEnumListSUT(node: headNode)
         try sut.insert(expectedValue, after: afterNode)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
@@ -250,10 +250,10 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.insert(expectedValue, at: index - 1)
         
-        let headNode = fixture.makeNodeSUT(numbers: numbers)
+        let headNode = fixture.makeEnumNodeSUT(numbers: numbers)
         let beforeNode = try headNode.node(at: index)
         
-        var sut = fixture.makeListSUT(node: headNode)
+        var sut = fixture.makeEnumListSUT(node: headNode)
         try sut.insert(expectedValue, before: beforeNode)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
@@ -271,7 +271,7 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.remove(at: index)
         
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         try sut.remove(at: index)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
@@ -285,8 +285,8 @@ final class EnumLinkedListTests: XCTestCase {
     /// Validates that `removeFirst()` the list is empty after removing the first node
     /// in a one node list.
     func test_removeFirst_one_node() throws {
-        let headNode = fixture.makeNodeSUT(nodeCount: 1)
-        var sut = fixture.makeListSUT(node: headNode)
+        let headNode = fixture.makeEnumNodeSUT(nodeCount: 1)
+        var sut = fixture.makeEnumListSUT(node: headNode)
         sut.removeFirst()
         XCTAssertNil(sut.head)
     }
@@ -297,7 +297,7 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.remove(at: 0)
         
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         sut.removeFirst()
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
@@ -311,8 +311,8 @@ final class EnumLinkedListTests: XCTestCase {
     /// Validates that `removeLast()` the list is empty after removing the last node
     /// in a one node list.
     func test_removeLast_one_node() throws {
-        let headNode = fixture.makeNodeSUT(nodeCount: 1)
-        var sut = fixture.makeListSUT(node: headNode)
+        let headNode = fixture.makeEnumNodeSUT(nodeCount: 1)
+        var sut = fixture.makeEnumListSUT(node: headNode)
         try sut.removeLast()
         XCTAssertNil(sut.head)
     }
@@ -324,14 +324,14 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.remove(at: index)
         
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         try sut.removeLast()
         XCTAssertEqual(sut.head?.asArray, expectedArray)
     }
     
     /// Validates that `remove(node:)` does nothing when operating on an empty list.
     func test_removeNode_empty() throws {
-        let bogusNode = fixture.makeBogusNode()
+        let bogusNode = fixture.makeEnumBogusNode()
         var sut = List.empty
         try sut.remove(node: bogusNode)
     }
@@ -339,8 +339,8 @@ final class EnumLinkedListTests: XCTestCase {
     /// Validates that `remove(node:)` the list is empty after removing the last node
     /// in a one node list.
     func test_removeNode_one_node() throws {
-        let headNode = fixture.makeNodeSUT(nodeCount: 1)
-        var sut = fixture.makeListSUT(node: headNode)
+        let headNode = fixture.makeEnumNodeSUT(nodeCount: 1)
+        var sut = fixture.makeEnumListSUT(node: headNode)
         try sut.remove(node: headNode)
         XCTAssertNil(sut.head)
     }
@@ -352,7 +352,7 @@ final class EnumLinkedListTests: XCTestCase {
         var expectedArray = numbers
         expectedArray.remove(at: index)
         
-        var sut = fixture.makeListSUT(numbers: numbers)
+        var sut = fixture.makeEnumListSUT(numbers: numbers)
         let targetNode = try XCTUnwrap(try sut.node(at: index))
         try sut.remove(node: targetNode)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
@@ -360,17 +360,17 @@ final class EnumLinkedListTests: XCTestCase {
 }
 
 extension LinkedListFixture {
-    func makeListSUT(nodeCount: Int = Default.nodeCount) -> EnumLinkedList<Int> {
-        let headNode = makeNodeSUT(nodeCount: nodeCount)
+    func makeEnumListSUT(nodeCount: Int = Default.nodeCount) -> EnumLinkedList<Int> {
+        let headNode = makeEnumNodeSUT(nodeCount: nodeCount)
         return EnumLinkedList(node: headNode)
     }
     
-    func makeListSUT(numbers: [Int]) -> EnumLinkedList<Int> {
-        let headNode = makeNodeSUT(numbers: numbers)
+    func makeEnumListSUT(numbers: [Int]) -> EnumLinkedList<Int> {
+        let headNode = makeEnumNodeSUT(numbers: numbers)
         return EnumLinkedList(node: headNode)
     }
     
-    func makeListSUT(node: EnumListNode<Int>) -> EnumLinkedList<Int> {
+    func makeEnumListSUT(node: EnumListNode<Int>) -> EnumLinkedList<Int> {
         EnumLinkedList(node: node)
     }
 }
