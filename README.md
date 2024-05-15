@@ -23,7 +23,7 @@ Reference and value semantics implementations of a linked list.
     - [x] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
 5. **Utility**:
-    - [ ] `count() -> Int`: Returns the number of nodes in the list.
+    - [x] `count() -> Int`: Returns the number of nodes in the list.
     - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
 
 6. **Deletion**:
