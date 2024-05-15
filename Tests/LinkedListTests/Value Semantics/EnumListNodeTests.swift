@@ -156,7 +156,8 @@ final class EnumListNodeTests: XCTestCase {
         expectedArray.insert(expectedValue, at: 0)
         
         var sut = fixture.makeSUT(numbers: numbers)
-        try sut.insert(expectedValue, before: sut)
+        let beforeNode = try XCTUnwrap(sut.node(at: 1))
+        try sut.insert(expectedValue, before: beforeNode)
         
         let resultArray = sut.asArray
         XCTAssertEqual(resultArray, expectedArray)
