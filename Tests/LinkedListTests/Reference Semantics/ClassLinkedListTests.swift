@@ -20,3 +20,22 @@ final class ClassLinkedListTests: XCTestCase {
         XCTAssertEqual(sut.head?.value, expectedValue)
     }
 }
+
+extension LinkedListFixture {
+    func makeEmptyListSUT() -> ClassLinkedList<Int> {
+        ClassLinkedList()
+    }
+    
+    func makeListSUT(_ value: Int) -> ClassLinkedList<Int> {
+        let node = makeListNodeSUT(value: value)
+        return ClassLinkedList(head: node)
+    }
+    
+    func makeListSUT(numbers: [Int]) -> ClassLinkedList<Int> {
+        let sut = makeEmptyListSUT()
+        for number in numbers {
+            sut.append(number)
+        }
+        return sut
+    }
+}

@@ -30,19 +30,4 @@ extension LinkedListFixture {
     func makeListNodeSUT(value: Int) -> ListNode<Int> {
         ListNode(value)
     }
-    
-    func makeListNodeSUT(nodeCount: Int = Default.nodeCount) -> ListNode<Int> {
-        makeListNodeSUT(numbers: self.randomNumbers(count: nodeCount))
-    }
-    
-    func makeListNodeSUT(numbers: [Int]) -> ListNode<Int> {
-        let sut = ListNode(numbers[0])
-        let remainingNumbers = Array(numbers.dropFirst())
-        
-        for number in remainingNumbers {
-            sut.append(number)
-        }
-        
-        return sut
-    }
 }

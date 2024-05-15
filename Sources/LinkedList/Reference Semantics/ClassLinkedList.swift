@@ -12,3 +12,13 @@ public final class ClassLinkedList<T> {
         self.head = head
     }
 }
+
+extension ClassLinkedList {
+    var asArray: [T] {
+        guard let head = head else {
+            return []
+        }
+        
+        return head.asArray
+    }
+}
