@@ -4,25 +4,23 @@ extension ClassLinkedList {
     /// Appends the given `value` at the end of the list.
     /// - Parameter value: The new node's value.
     public func append(_ value: T) {
-        let newNode = ListNode(value)
-        
-        if let head = self.head {
-            var currentNode: ListNode<T> = head
-            
-            while let nextNode = currentNode.next {
-                currentNode = nextNode
-            }
-            
-            currentNode.next = newNode
-            self.tail = newNode
+        append(node: ListNode(value))
+    }
+    
+    /// Appends the given `node` to the end of the list.
+    /// - Parameter node: The node to be appended.
+    public func append(node: ListNode<T>) {
+        if self.head != nil {
+            tail?.next = node
+            self.tail = node
         } else {
             /* empty list */
-            let node = newNode
+            let node = node
             self.head = node
             self.tail = node
         }
     }
-    
+
     /// Inserts the given `value` into the list at the given `index`.
     /// - Parameters:
     ///   - value: The value to be inserted.

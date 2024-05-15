@@ -146,7 +146,33 @@ final class ClassLinkedList_UtilityTests: XCTestCase {
         XCTAssertEqual(swappedLeft.value, expectedLeftValue)
         XCTAssertEqual(swappedRight.value, expectedRightValue)
     }
-    
+
+    /*
+    */
+     /// Validates that `copy()` correctly makes a copy of a list.
+    func test_copy() throws {
+        let numbers = fixture.randomNumbers()
+        let sut = fixture.makeListSUT(numbers: numbers)
+
+        let clone = sut.copy()
+        XCTAssertEqual(clone.asArray, sut.asArray)
+
+        /* ensure we've made distinct clone nodes */
+        for index in numbers.indices {
+            let sutNode = try XCTUnwrap(sut.node(at: index))
+            let cloneNode = try XCTUnwrap(clone.node(at: index))
+            XCTAssertFalse(sutNode === cloneNode)
+        }
+
+        /* one further test that we've got distinct clones;
+         update values in `clone` and check them against `sut` */
+        for index in numbers.indices {
+            let cloneNode = try XCTUnwrap(clone.node(at: index))
+            cloneNode.value += 1
+        }
+        XCTAssertNotEqual(clone.asArray, sut.asArray)
+    }
+
     // MARK: - Utilities
     private func nodeVisitor(node: ListNode<Int>) {
         didCallVisitor = true

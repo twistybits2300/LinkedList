@@ -62,7 +62,7 @@ extension ClassLinkedList {
         var currentNode = head
         var previousNode: ListNode<T>? = nil
         
-        /* we'll traverse the lise once flipping the order of the nodes, */
+        /* we'll traverse the list once flipping the order of the nodes, */
         self.tail = head
         
         while currentNode != nil {
@@ -75,6 +75,20 @@ extension ClassLinkedList {
         self.head = previousNode
     }
     
+    /// Makes a copy of this list.
+    /// - Returns: A copy of the nodes in this list, in the order they're currently in within this list.
+    public func copy() -> ClassLinkedList<T> {
+        let clone = ClassLinkedList()
+
+        self.traverse { node in
+            let clonedNode = ListNode(node.value, next: node.next)
+            clone.append(node: clonedNode)
+        }
+
+        return clone
+    }
+
+    // MARK: - Utilities
     func swapValues(left leftNode: ListNode<T>, rightNode: ListNode<T>) {
         let leftValue = leftNode.value
         leftNode.value = rightNode.value
