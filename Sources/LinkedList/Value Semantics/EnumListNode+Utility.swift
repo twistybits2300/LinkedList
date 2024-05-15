@@ -9,4 +9,32 @@ extension EnumListNode {
         }
         return count
     }
+    
+    /// Appends the nodes from the provided `list` to this list.
+    /// - Parameter list: The list from which to append the nodes.
+    mutating func append(contentsOf list: EnumListNode?) {
+        guard let list = list else { return }
+        
+        var current: Self? = list
+        
+        while let currentNode = current {
+            insert(currentNode.currentValue)
+            current = current?.next
+        }
+    }
+    
+    /// Returns the values of the nodes in this list as an array.
+    var asArray: [T] {
+        var working = [T]()
+        var currentNode: EnumListNode? = self
+        
+        while currentNode != nil {
+            if let value = currentNode?.currentValue {
+                working.append(value)
+            }
+            currentNode = currentNode?.next
+        }
+        
+        return working
+    }
 }

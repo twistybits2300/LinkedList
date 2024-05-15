@@ -46,40 +46,4 @@ extension EnumListNode {
         /* if we made it to here it means the index was not valid */
         throw LinkedListError.invalidIndex(index)
     }
-    
-    private mutating func append(contentsOf list: EnumListNode?) {
-        guard let list = list else { return }
-        
-        var current: Self? = list
-        
-        while let currentNode = current {
-            insert(currentNode.currentValue)
-            current = current?.next
-        }
-    }
-    
-//    /// Helper method to set the next node.
-//    private mutating func setNext(_ next: EnumListNode<T>?) {
-//        switch self {
-//        case .value(let value, _):
-//            self = .value(value, next: next)
-//        }
-//    }
-    
-}
-
-extension EnumListNode {
-    var asArray: [T] {
-        var working = [T]()
-        var currentNode: EnumListNode? = self
-        
-        while currentNode != nil {
-            if let value = currentNode?.currentValue {
-                working.append(value)
-            }
-            currentNode = currentNode?.next
-        }
-        
-        return working
-    }
 }
