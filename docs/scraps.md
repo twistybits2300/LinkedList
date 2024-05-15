@@ -20,6 +20,24 @@
 ```
 
 ```swift
+    func test_insertBefore_middle() throws {
+        let expectedValue = fixture.randomNumber
+        print("expectedValue: \(expectedValue)")
+        let numbers = fixture.randomNumbers()
+        print("      numbers: \(numbers)")
+        let index = numbers.count / 2
+        print("   numbers[\(index)]: \(numbers[index])")
+        
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: index)
+        print("expectedArray: \(expectedArray)")
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let middle = try XCTUnwrap(sut.node(at: index))
+        try sut.insert(expectedValue, before: middle)
+        print("  sut.asArray: \(sut.asArray)")
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
 ```
 
 ```swift

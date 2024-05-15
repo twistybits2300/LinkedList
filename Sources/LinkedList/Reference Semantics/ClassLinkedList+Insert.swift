@@ -27,7 +27,7 @@ extension ClassLinkedList {
     /// - Parameters:
     ///   - value: The value to be inserted.
     ///   - index: The index of the node to insert the value at.
-    func insert(_ value: T, at index: Int) throws {
+    public func insert(_ value: T, at index: Int) throws {
         guard index >= 0 else {
             throw LinkedListError.invalidIndex(index)
         }
@@ -72,9 +72,9 @@ extension ClassLinkedList where T: Equatable {
     ///   - after: The node where the insertion will occur.
     /// - Throws: `LinkedListError.unknownNode` if the given `after` node
     /// cannot be found in the list .
-    func insert(_ value: T, after node: ListNode<T>) throws {
+    public func insert(_ value: T, after node: ListNode<T>) throws {
         guard head != nil else {
-            throw LinkedListError.unknownNode
+            throw LinkedListError.emptyList
         }
         
         guard tail !== node else {
@@ -86,5 +86,35 @@ extension ClassLinkedList where T: Equatable {
         let newNode = ListNode(value)
         newNode.next = node.next
         node.next = newNode
+    }
+    
+    /// Inserts the given `value` into the list before the given `before` node.
+    /// - Parameters:
+    ///   - value: The value to be inserted.
+    ///   - before: The node at which to insert the value.
+    public func insert(_ value: T, before node: ListNode<T>) throws {
+        guard head != nil else {
+            throw LinkedListError.emptyList
+        }
+
+        let newNode = ListNode(value)
+        
+        if node === head {
+            newNode.next = head
+            head = newNode
+            return
+        }
+        
+        var currentNode = head
+        while let nextNode = currentNode?.next, nextNode !== node {
+            currentNode = nextNode
+        }
+        
+        if currentNode?.next === node {
+            newNode.next = node
+            currentNode?.next = newNode
+        } else {
+            throw LinkedListError.unknownNode
+        }
     }
 }

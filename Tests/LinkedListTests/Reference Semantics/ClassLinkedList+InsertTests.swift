@@ -154,4 +154,57 @@ final class ClassLinkedList_InsertTests: XCTestCase {
         try sut.insert(expectedValue, after: middle)
         XCTAssertEqual(sut.asArray, expectedArray)
     }
+    
+    /// Validates that `insert(_:before:)` throws and error when trying to
+    /// insert into an empty list.
+    func test_insertBefore_empty() throws {
+        let expectedValue = fixture.randomNumber
+        let bogusNode = fixture.makeBogusListNode()
+        let sut = fixture.makeEmptyListSUT()
+        XCTAssertThrowsError(try sut.insert(expectedValue, before: bogusNode))
+    }
+    
+    /// Validates that `insert(_:before:)` can insert into the head of the list.
+    func test_insertBefore_head() throws {
+        let expectedValue = fixture.randomNumber
+        let numbers = fixture.randomNumbers()
+
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: 0)
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let head = try XCTUnwrap(sut.head)
+        try sut.insert(expectedValue, before: head)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:before:)` can insert at the tail of the list.
+    func test_insertBefore_tail() throws {
+        let expectedValue = fixture.randomNumber
+        let numbers = fixture.randomNumbers()
+
+        var expectedArray = numbers
+        let index = numbers.count - 1
+        expectedArray.insert(expectedValue, at: index)
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let tail = try XCTUnwrap(sut.tail)
+        try sut.insert(expectedValue, before: tail)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:before:)` can insert into the middle of the list.
+    func test_insertBefore_middle() throws {
+        let expectedValue = fixture.randomNumber
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: index)
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let middle = try XCTUnwrap(sut.node(at: index))
+        try sut.insert(expectedValue, before: middle)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
 }

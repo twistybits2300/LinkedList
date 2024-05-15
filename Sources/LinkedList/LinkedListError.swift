@@ -9,4 +9,5 @@ public enum LinkedListError: Error {
     case invalidIndex(Int)
     case unknownNode
     case unableToRemoveNode
+    case emptyList
 }
