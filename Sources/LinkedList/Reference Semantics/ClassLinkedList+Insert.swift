@@ -4,6 +4,8 @@ extension ClassLinkedList {
     /// Appends the given `value` at the end of the list.
     /// - Parameter value: The new node's value.
     public func append(_ value: T) {
+        let newNode = ListNode(value)
+        
         if let head = self.head {
             var currentNode: ListNode<T> = head
             
@@ -11,11 +13,13 @@ extension ClassLinkedList {
                 currentNode = nextNode
             }
             
-            currentNode.next = ListNode(value)
+            currentNode.next = newNode
+            self.tail = newNode
         } else {
             /* empty list */
-            let node = ListNode(value)
+            let node = newNode
             self.head = node
+            self.tail = node
         }
     }
     
@@ -23,29 +27,40 @@ extension ClassLinkedList {
     /// - Parameters:
     ///   - value: The value to be inserted.
     ///   - index: The index of the node to insert the value at.
-    public func insert(_ value: T, at index: Int) {
-        let newNode = ListNode(value)
+    func insert(_ value: T, at index: Int) throws {
+        guard index >= 0 else {
+            throw LinkedListError.invalidIndex(index)
+        }
         
-        if let head = self.head {
-            if index <= 0 {
-                /* insert at head */
-                newNode.next = self.head
-                self.head = newNode
-            } else {
-                var currentNode = head
-                var count = 0
-                
-                while let nextNode = currentNode.next, count < index - 1 {
-                    currentNode = nextNode
-                    count += 1
-                }
-                
-                newNode.next = currentNode.next
-                currentNode.next = newNode
+        let newNode = ListNode(value)
+        if index == 0 {
+            newNode.next = head
+            head = newNode
+            if tail == nil {
+                tail = newNode
             }
+            return
+        }
+
+        var previousNode = head
+        var currentIndex = 0
+
+        while currentIndex < index - 1 && previousNode != nil {
+            previousNode = previousNode?.next
+            currentIndex += 1
+        }
+
+        if let previousNode = previousNode {
+            if previousNode.next == nil {
+                tail = newNode
+            } else if previousNode.next === tail {
+                tail?.next = newNode
+                return
+            }
+            newNode.next = previousNode.next
+            previousNode.next = newNode
         } else {
-            /* list is empty */
-            self.head = newNode
+            throw LinkedListError.invalidIndex(index)
         }
     }
 }

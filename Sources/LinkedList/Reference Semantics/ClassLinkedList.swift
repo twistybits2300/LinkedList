@@ -5,11 +5,15 @@ public final class ClassLinkedList<T> {
     /// Pointer to the first node in the list.
     public var head: ListNode<T>?
     
+    /// Pointer to the last node in the list.
+    public var tail: ListNode<T>?
+    
     // MARK: - Initialization
     /// Initializes using the optional `head` node.
     /// - Parameter head: The list's first node.
     public init(head: ListNode<T>? = nil) {
         self.head = head
+        self.tail = head
     }
 }
 
@@ -23,6 +27,7 @@ extension ClassLinkedList {
         return head.asArray
     }
     
+    /*
     var tail: ListNode<T>? {
         guard let head = self.head else {
             return nil
@@ -35,6 +40,7 @@ extension ClassLinkedList {
         
         return currentNode
     }
+    */
     
     func node(at index: Int) -> ListNode<T>? {
         guard let head = head else {
