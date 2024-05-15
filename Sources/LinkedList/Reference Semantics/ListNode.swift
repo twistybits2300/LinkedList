@@ -3,7 +3,7 @@ import Foundation
 /// A node in a singly-linked list that uses reference semantics.
 public final class ListNode<T> {
     /// THe node's value.
-    public private(set) var value: T
+    public var value: T
     
     /// The pointer to the next node in the list.
     public var next: ListNode<T>?

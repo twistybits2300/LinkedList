@@ -93,6 +93,60 @@ final class ClassLinkedList_UtilityTests: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
     }
     
+    /// Validates that `reverse()` does nothing with an empty list.
+    func test_reverse_empty() throws {
+        let sut = fixture.makeEmptyListSUT()
+        sut.reverse()
+        XCTAssertNil(sut.head)
+    }
+    
+    /// Validates that `reverse()` does nothing when the list contains a single node.
+    func test_reverse_one_node() throws {
+        let expectedValue = fixture.randomNumber
+        let sut = fixture.makeListSUT(expectedValue)
+        sut.reverse()
+        XCTAssertEqual(sut.head?.value, expectedValue)
+    }
+    
+    /// Validates that `reverse()` works as expected with a single node list.
+    func test_reverse_two_nodes() throws {
+        let numbers = fixture.randomNumbers(count: 2)
+        let expectedArray = Array(numbers.reversed())
+
+        let sut = fixture.makeListSUT(numbers: numbers)
+        sut.reverse()
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `reverse()` works as expected.
+    func test_reverse() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedArray = Array(numbers.reversed())
+
+        let sut = fixture.makeListSUT(numbers: numbers)
+        sut.reverse()
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `swap(left:right:)` works as expected.
+    func test_swapValuesLeftRight() throws {
+        let sut = fixture.makeListSUT(nodeCount: 2)
+        
+        let leftNode = try XCTUnwrap(sut.node(at: 0))
+        let rightNode = try XCTUnwrap(sut.node(at: 1))
+        
+        /* after the swap, the expected values at nodes 0 and 1 */
+        let expectedLeftValue = rightNode.value // node 0
+        let expectedRightValue = leftNode.value // node 1
+        
+        sut.swapValues(left: leftNode, rightNode: rightNode)
+        
+        let swappedLeft = try XCTUnwrap(sut.node(at: 0))
+        let swappedRight = try XCTUnwrap(sut.node(at: 1))
+        XCTAssertEqual(swappedLeft.value, expectedLeftValue)
+        XCTAssertEqual(swappedRight.value, expectedRightValue)
+    }
+    
     // MARK: - Utilities
     private func nodeVisitor(node: ListNode<Int>) {
         didCallVisitor = true

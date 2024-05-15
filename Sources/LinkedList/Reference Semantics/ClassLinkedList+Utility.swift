@@ -57,6 +57,30 @@ extension ClassLinkedList {
         head == nil
     }
     
+    /// Reverses the list.
+    public func reverse() {
+        var currentNode = head
+        var previousNode: ListNode<T>? = nil
+        
+        /* we'll traverse the lise once flipping the order of the nodes, */
+        self.tail = head
+        
+        while currentNode != nil {
+            let nextNode = currentNode?.next
+            currentNode?.next = previousNode
+            previousNode = currentNode
+            currentNode = nextNode
+        }
+        
+        self.head = previousNode
+    }
+    
+    func swapValues(left leftNode: ListNode<T>, rightNode: ListNode<T>) {
+        let leftValue = leftNode.value
+        leftNode.value = rightNode.value
+        rightNode.value = leftValue
+    }
+
     var asArray: [T] {
         guard let head = head else {
             return []
