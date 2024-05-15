@@ -98,4 +98,24 @@ extension EnumListNode: Equatable where T : Equatable {
             throw LinkedListError.unknownNode
         }
     }
+    
+    /// Inserts the given `value` into the list before the provided `beforeNode`. `T` must be
+    /// `Equatable`
+    /// - Parameters:
+    ///   - value: The value to be inserted.
+    ///   - beforeNode: The node where the value will be inserted before.
+    public mutating func insert(_ value: T, before beforeNode: EnumListNode<T>) throws {
+        self = try self.inserting(value, before: beforeNode)
+    }
+    
+    private func inserting(_ value: T, before beforeNode: EnumListNode<T>) throws -> EnumListNode<T> {
+        if self.next == beforeNode {
+            return .init(value, next: .value(currentValue, next: self.next))
+        } else if let next = self.next {
+            let nextNode = try next.inserting(value, before: beforeNode)
+            return .init(currentValue, next: nextNode)
+        } else {
+            throw LinkedListError.unknownNode
+        }
+    }
 }

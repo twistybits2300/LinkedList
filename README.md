@@ -12,29 +12,29 @@ Reference and value semantics implementations of a linked list.
     - [x] `insert(_ value: T)`: Inserts a new node at the end of the list.
     - [x] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
     - [x] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
-    - [ ] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
+    - [x] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
 
-3. **Deletion**:
+3. **Access**:
+    - [ ] `first() -> ListNode<T>?`: Returns the first node of the list.
+    - [ ] `last() -> ListNode<T>?`: Returns the last node of the list.
+    - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
+
+4. **Utility**:
+    - [ ] `count() -> Int`: Returns the number of nodes in the list.
+    - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
+
+5. **Traversal**:
+    - [ ] `traverse()`: Visits each node of the list, often used for printing all values.
+
+6. **Deletion**:
     - [ ] `remove(at index: Int)`: Removes the node at a specific index.
     - [ ] `remove(node: ListNode<T>)`: Removes a specified node from the list.
     - [ ] `removeLast()`: Removes the last node of the list.
     - [ ] `removeAll()`: Removes all nodes from the list.
 
-4. **Traversal**:
-    - [ ] `traverse()`: Visits each node of the list, often used for printing all values.
-
-5. **Searching**:
+7. **Searching**:
     - [ ] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
     - [ ] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
-
-6. **Access**:
-    - [ ] `first() -> ListNode<T>?`: Returns the first node of the list.
-    - [ ] `last() -> ListNode<T>?`: Returns the last node of the list.
-    - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
-
-7. **Utility**:
-    - [ ] `count() -> Int`: Returns the number of nodes in the list.
-    - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
 
 8. **Reverse**:
     - [ ] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.

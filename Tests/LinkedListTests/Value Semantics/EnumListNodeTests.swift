@@ -108,7 +108,7 @@ final class EnumListNodeTests: XCTestCase {
     
     /// Validates that `insert(_:after)` works as expected when the `afterNode` is
     /// the node under test..
-    func test_insertAfter_node_is_afterNode() throws {
+    func test_insertAfter_node_equals_afterNode() throws {
         let numbers = fixture.randomNumbers()
         let expectedValue = fixture.randomNumber
         var expectedArray = numbers
@@ -138,13 +138,54 @@ final class EnumListNodeTests: XCTestCase {
         XCTAssertEqual(sut.asArray, expectedArray)
     }
     
-    /// Validates that `insert(_:at:)` throws an error when given an invalid `index`.
+    /// Validates that `insert(_:after:)` throws an error when given an invalid `index`.
     func test_insertAfter_throws() throws {
         let bogusNode = EnumListNode(fixture.bogusNumber)
         var sut = fixture.makeSUT()
         
         let randomNumber = fixture.randomNumber
         XCTAssertThrowsError(try sut.insert(randomNumber, after: bogusNode))
+    }
+    
+    /// Validates that `insert(_:before)` works as expected when the `beforeNode` is
+    /// the node under test..
+    func test_insertBefore_node_equals_beforeNode() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedValue = fixture.randomNumber
+        var expectedArray = numbers
+        expectedArray.insert(expectedValue, at: 0)
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.insert(expectedValue, before: sut)
+        
+        let resultArray = sut.asArray
+        XCTAssertEqual(resultArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:before:)` correctly handles inserting before a node
+    /// that's not the node under test.
+    func test_insertBefore_recursive() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedValue = fixture.randomNumber
+        var expectedArray = numbers
+        let index = numbers.count / 2
+        expectedArray.insert(expectedValue, at: index - 1)
+        
+        var sut = fixture.makeSUT(numbers: numbers)
+        XCTAssertEqual(sut.asArray, numbers)
+        
+        let beforeNode = try XCTUnwrap(sut.node(at: index))
+        try sut.insert(expectedValue, before: beforeNode)
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
+    
+    /// Validates that `insert(_:before:)` throws an error when given an invalid `index`.
+    func test_insertBefore_throws() throws {
+        let bogusNode = EnumListNode(fixture.bogusNumber)
+        var sut = fixture.makeSUT()
+        
+        let randomNumber = fixture.randomNumber
+        XCTAssertThrowsError(try sut.insert(randomNumber, before: bogusNode))
     }
 
     // MARK: - Utilities
