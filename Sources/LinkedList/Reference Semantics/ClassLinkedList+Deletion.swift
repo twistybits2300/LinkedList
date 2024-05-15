@@ -65,11 +65,14 @@ extension ClassLinkedList {
     /// `LinkedListErrors` thrown:
     /// - `unableToRemoveNode` if the list is empty
     /// - `.unknownNode` if `node` isn't in the list.
-    public func remove(node: ListNode<T>) throws {
+    @discardableResult
+    public func remove(node: ListNode<T>) throws -> T? {
         guard head != nil else {
             throw LinkedListError.unableToRemoveNode
         }
         
+        var removedValue: T?
+
         if node === head {
             /* we'll be removing the head */
             if head === tail {
@@ -77,8 +80,9 @@ extension ClassLinkedList {
                 self.tail = head?.next
             }
             
+            removedValue = head?.value
             self.head = head?.next
-            return
+            return removedValue
         }
         
         var previousNode = head
@@ -88,13 +92,15 @@ extension ClassLinkedList {
                 if nextNode.next == nil {
                     /* we're at the tail */
                     previousNode?.next = nil
+                    removedValue = tail?.value
                     self.tail = previousNode
-                    return
+                    return removedValue
                 }
                 
                 /* we're removing `previousNode` */
                 previousNode?.next = nextNode.next
-                return
+                removedValue = nextNode.value
+                return removedValue
             }
             
             previousNode = nextNode
