@@ -32,72 +32,89 @@ final class ClassLinkedList_DeletionTests: XCTestCase {
     
     /// Validates that `remove(at:)` leaves an empty list after removing the only node in a list.
     func test_removeAt_leaves_empty_list() throws {
-        let sut = fixture.makeListSUT(fixture.randomNumber)
-        try sut.remove(at: 0)
+        let expectedReturnedValue = fixture.randomNumber
+        let sut = fixture.makeListSUT(expectedReturnedValue)
+        let returnedValue = try sut.remove(at: 0)
         XCTAssertNil(sut.head)
         XCTAssertNil(sut.tail)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
     
     /// Validates that `remove(at:)` can remove the head in a two-node list.
     func test_removeAt_head_two_nodes() throws {
         let numbers = fixture.randomNumbers(count: 2)
-        let expectedValue = numbers[1]
+        let expectedReturnedValue = numbers[0]
+        let expectedHeadValue = numbers[1]
         let index = 0
         let sut = fixture.makeListSUT(numbers: numbers)
-        try sut.remove(at: index)
-        XCTAssertEqual(sut.head?.value, expectedValue)
+        let returnedValue = try sut.remove(at: index)
+        XCTAssertEqual(sut.head?.value, expectedHeadValue)
         XCTAssertEqual(sut.head, sut.tail)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
     
     /// Validates that `remove(at:)` can remove the tail in a two-node list.
     func test_removeAt_tail_two_nodes() throws {
         let numbers = fixture.randomNumbers(count: 2)
-        let expectedValue = numbers[0]
+        let expectedHeadValue = numbers[0]
+        let expectedReturnedValue = numbers[1]
         let index = 1
         let sut = fixture.makeListSUT(numbers: numbers)
-        try sut.remove(at: index)
-        XCTAssertEqual(sut.head?.value, expectedValue)
+        let returnedValue = try sut.remove(at: index)
+        XCTAssertEqual(sut.head?.value, expectedHeadValue)
         XCTAssertEqual(sut.head, sut.tail)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
     
     /// Validates that `remove(at:)` can remove the head of a multi-node list.
     func test_removeAt_head() throws {
         let numbers = fixture.randomNumbers()
+        let expectedReturnedValue = numbers[0]
         let expectedHeadValue = numbers[1]
         let expectedTailValue = numbers[numbers.count - 1]
         let index = 0
         let sut = fixture.makeListSUT(numbers: numbers)
-        try sut.remove(at: index)
+        let returnedValue = try sut.remove(at: index)
         XCTAssertEqual(sut.head?.value, expectedHeadValue)
         XCTAssertEqual(sut.tail?.value, expectedTailValue)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
     
     /// Validates that `remove(at:)` can remove from the middle of a list.
     func test_removeAt_middle() throws {
         let numbers = fixture.randomNumbers()
         let index = numbers.count / 2
-        
+        let expectedReturnedValue = numbers[index]
+
         var expectedArray = numbers
         expectedArray.remove(at: index)
         
         let sut = fixture.makeListSUT(numbers: numbers)
-        try sut.remove(at: index)
+        let returnedValue = try sut.remove(at: index)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
     
     /// Validates that `remove(at:)` can remove the tail of a list.
     func test_removeAt_tail() throws {
         let numbers = fixture.randomNumbers()
+        print("      numbers: \(numbers)")
         let index = numbers.count - 1
         let expectedTailValue = numbers[index - 1]
-        
+
+        let expectedReturnedValue = numbers[index]
+        print("exReturnedVal: \(expectedReturnedValue)")
+
         var expectedArray = numbers
         expectedArray.remove(at: index)
         
         let sut = fixture.makeListSUT(numbers: numbers)
-        try sut.remove(at: index)
+        let returnedValue = try sut.remove(at: index)
+        print("returnedValue: \(String(describing: returnedValue))")
         XCTAssertEqual(sut.head?.asArray, expectedArray)
         XCTAssertEqual(sut.tail?.value, expectedTailValue)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
 
     /// Validates that `remove(node:)` throws an error when `remove` is called on an empty list.

@@ -7,7 +7,8 @@ extension ClassLinkedList {
     /// `LinkedListError`s thrown:
     /// - `.unableToRemoveNode` when attempting this operation on an empty list.
     /// - `.invalidIndex(index)` when the index is `< 0` or `>` number of nodex in list.
-    public func remove(at index: Int) throws {
+    @discardableResult
+    public func remove(at index: Int) throws -> T? {
         guard head != nil else {
             throw LinkedListError.unableToRemoveNode
         }
@@ -16,6 +17,8 @@ extension ClassLinkedList {
             throw LinkedListError.invalidIndex(index)
         }
         
+        var removedValue: T?
+        
         if index == 0 {
             /* we'll be removing the head */
             if head === tail {
@@ -23,8 +26,9 @@ extension ClassLinkedList {
                 self.tail = head?.next
             }
             
+            removedValue = head?.value
             self.head = head?.next
-            return
+            return removedValue
         }
         
         var previousNode = head
@@ -36,13 +40,15 @@ extension ClassLinkedList {
                 if nextNode.next == nil {
                     /* we're at the tail */
                     previousNode?.next = nil
+                    removedValue = tail?.value
                     self.tail = previousNode
-                    return
+                    return removedValue
                 }
                 
                 /* we're removing `previousNode` */
+                removedValue = nextNode.value
                 previousNode?.next = nextNode.next
-                return
+                return removedValue
             }
             
             previousNode = nextNode
