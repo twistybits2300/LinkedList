@@ -203,6 +203,15 @@ final class EnumListNodeTests: XCTestCase {
         
         XCTAssertEqual(receivedNumbers, expectedArray)
     }
+    
+    /// Validates that `first` returns the first node in the list.
+    func test_first() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedValue = numbers[0]
+        let sut = fixture.makeSUT(numbers: numbers)
+        let firstNumber = try XCTUnwrap(sut.first?.currentValue)
+        XCTAssertEqual(firstNumber, expectedValue)
+    }
 
     // MARK: - Utilities
     private func debug(_ sut: EnumListNode<Int>) {

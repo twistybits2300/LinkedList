@@ -14,17 +14,17 @@ Reference and value semantics implementations of a linked list.
     - [x] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
     - [x] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
 
-3. **Access**:
-    - [ ] `first() -> ListNode<T>?`: Returns the first node of the list.
+3. **Traversal**:
+    - [x] `traverse()`: Visits each node of the list, often used for printing all values.
+
+4. **Access**:
+    - [x] `first() -> ListNode<T>?`: Returns the first node of the list.
     - [ ] `last() -> ListNode<T>?`: Returns the last node of the list.
     - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
-4. **Utility**:
+5. **Utility**:
     - [ ] `count() -> Int`: Returns the number of nodes in the list.
     - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
-
-5. **Traversal**:
-    - [ ] `traverse()`: Visits each node of the list, often used for printing all values.
 
 6. **Deletion**:
     - [ ] `remove(at index: Int)`: Removes the node at a specific index.
