@@ -20,6 +20,9 @@
 ```
 
 ```swift
+```
+
+```swift
     func test_insertBefore_middle() throws {
         let expectedValue = fixture.randomNumber
         print("expectedValue: \(expectedValue)")
@@ -45,115 +48,17 @@
 ```
 
 ```swift
-    public func insert2(_ value: T, after: ListNode<T>) throws {
-        let newNode = ListNode(value)
+        /*
+        var currentNode = head
+        var count = 0
         
-        if let head = self.head {
-            if after == head {
-                /* inserting at head */
-                newNode.next = after.next
-                head.next = newNode
-            } else {
-                var currentNode = head
-                
-                while let nextNode = currentNode.next {
-                    if nextNode == after {
-                        if nextNode.next == nil {
-                            /* inserting at tail */
-                            newNode.next = nextNode.next
-                            nextNode.next = newNode
-                            return
-                        } else {
-                            print("currentNode: \(currentNode.value)")
-                            print("   nextNode: \(nextNode.value)")
-                            newNode.next = nextNode
-                            currentNode.next = newNode
-                            return
-                        }
-                    }
-                    currentNode = nextNode
-                }
-                
-                throw LinkedListError.unknownNode
-            }
-        } else {
-            /* inserting into empty list */
-            self.head = newNode
+        while let nextNode = currentNode.next, count < index {
+            currentNode = nextNode
+            count += 1
         }
-    }
-    
-```
-
-```swift
-
-    /// Inserts the given `value` into the list at the given `index`.
-    /// - Parameters:
-    ///   - value: The value to be inserted.
-    ///   - index: The index of where to insert.
-    public func insert(_ value: T, at index: Int) {
-        let newNode = ListNode(value)
-
-        if index <= 0 {
-            
-            /*
-            print("self: \(self.value) | self.next: \(String(describing: self.next?.value))")
-            print("\(self.asArray)")
-            
-            let currentNext = self.next
-            newNode.next = self
-            self.next = currentNext
-
-            print("self: \(self.value) | self.next: \(String(describing: self.next?.value))")
-            print("\(self.asArray)")
-            */
-        } else {
-            var currentNode = self
-            var count = 0
-            
-            while let nextNode = currentNode.next, count < index - 1 {
-                currentNode = nextNode
-                count += 1
-            }
-
-            newNode.next = currentNode.next
-            currentNode.next = newNode
-        }
-    }
-    
-    func insert2(_ value: T, at index: Int) {
-            if index <= 0 {
-                let newNode = ListNode(value)
-                newNode.next = self.next
-                self.next = newNode
-            } else {
-                var currentNode = self
-                var currentIndex = 0
-                while let nextNode = currentNode.next, currentIndex < index - 1 {
-                    currentNode = nextNode
-                    currentIndex += 1
-                }
-                let newNode = ListNode(value)
-                newNode.next = currentNode.next
-                currentNode.next = newNode
-            }
-        }
-    
-    /// Validates that `insert(_:at:)` can successfully insert a node at the head of the list.
-    func test_insertAt_head() throws {
-        let expectedValue = fixture.randomNumber
-        print("expectedValue: \(expectedValue)")
-        let numbers = fixture.randomNumbers()
-        print("      numbers: \(numbers)")
-        let sut = fixture.makeListNodeSUT(numbers: numbers)
         
-        let index = 0
-        var expectedArray = numbers
-        expectedArray.insert(expectedValue, at: index)
-        print("expectedArray: \(expectedArray)")
-        sut.insert(expectedValue, at: index)
-        print("  sut.asArray: \(sut.asArray)")
-        //XCTAssertEqual(sut.asArray, expectedArray)
-    }
+        return currentNode
+        */
 ```
 
 ```swift

@@ -20,18 +20,16 @@ Reference and value semantics implementations of a linked list.
     - [x] `removeFirst()`: Removes the first node of the list.
     - [x] `removeLast()`: Removes the last node of the list.
     - save this for when `traverse()` is available
-    - [ ] `removeAll()`: Removes all nodes from the list.
+    - [x] `removeAll()`: Removes all nodes from the list.
 
 4. **Traversal**:
     - [x] `traverse()`: Visits each node of the list, often used for printing all values.
 
 5. **Searching**:
-    - [ ] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
-    - [ ] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
+    - [x] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
+    - [x] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
 
 6. **Access**:
-    - [ ] `first() -> ListNode<T>?`: Returns the first node of the list.
-    - [ ] `last() -> ListNode<T>?`: Returns the last node of the list.
     - [ ] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
 7. **Utility**:

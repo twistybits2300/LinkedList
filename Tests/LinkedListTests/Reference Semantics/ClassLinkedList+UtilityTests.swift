@@ -42,6 +42,31 @@ final class ClassLinkedList_UtilityTests: XCTestCase {
         XCTAssertEqual(visitorNodeCount, expectedCount)
     }
     
+    /// Validates that `node(at:)` returns `nil` if the list is empty.
+    func test_nodeAt_empty() throws {
+        let sut = fixture.makeEmptyListSUT()
+        XCTAssertNil(sut.node(at: 0))
+    }
+    
+    /// Validates that `node(at:)` returns the expected value in a single node list.
+    func test_nodeAt_one_node() throws {
+        let expectedValue = fixture.randomNumber
+        let sut = fixture.makeListSUT(expectedValue)
+        let foundNode = try XCTUnwrap(sut.node(at: 0))
+        XCTAssertEqual(foundNode.value, expectedValue)
+    }
+    
+    /// Validates that `node(at:)` returns the expected value.
+    func test_nodeAt() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        let expectedValue = numbers[index]
+        
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let foundNode = try XCTUnwrap(sut.node(at: index))
+        XCTAssertEqual(foundNode.value, expectedValue)
+    }
+    
     // MARK: - Utilities
     private func nodeVisitor(node: ListNode<Int>) {
         didCallVisitor = true

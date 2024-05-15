@@ -8,16 +8,10 @@ extension ClassLinkedList where T: Equatable {
         find(value) != nil
     }
     
+    /// Searches the list for the given `value`
+    /// - Parameter value: The value to search for.
+    /// - Returns: The first node from `head` that contains `value`; `nil` if not found.
     public func find(_ value: T) -> ListNode<T>? {
-        /*
-        var current = head
-        
-        while let currentNode = current {
-            
-            current = currentNode.next
-        }
-        */
-        
         var foundNode: ListNode<T>?
         
         func searcher(node: ListNode<T>) {

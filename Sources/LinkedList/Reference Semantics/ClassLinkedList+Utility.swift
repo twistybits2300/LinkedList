@@ -12,27 +12,34 @@ extension ClassLinkedList {
         }
     }
     
+    /// Returns the node at the given `index`.
+    /// - Parameter index: The index of the node to be found.
+    /// - Returns: The node at the given `index`; `nil` if not found.
+    public func node(at index: Int) -> ListNode<T>? {
+        guard head != nil else {
+            return nil
+        }
+        
+        var foundNode: ListNode<T>?
+        var count = 0
+        
+        func finder(node: ListNode<T>) {
+            if count == index {
+                foundNode = node
+            }
+            count += 1
+        }
+        
+        traverse(visit: finder(node:))
+        
+        return foundNode
+    }
+    
     var asArray: [T] {
         guard let head = head else {
             return []
         }
         
         return head.asArray
-    }
-    
-    func node(at index: Int) -> ListNode<T>? {
-        guard let head = head else {
-            return nil
-        }
-        
-        var currentNode = head
-        var count = 0
-        
-        while let nextNode = currentNode.next, count < index {
-            currentNode = nextNode
-            count += 1
-        }
-        
-        return currentNode
     }
 }
