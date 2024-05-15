@@ -123,4 +123,13 @@ public class DoublyLinkedList<T: Equatable> {
 
         return false
     }
+    
+    /// Traverses all nodes in the list starting at `head` and continuing until `tail`,
+    /// calling the `visitor` closure upon visiting each node.
+    /// - Parameter visitor: The closure to be called.
+    public func traverse(visit visitor: (DoublyLinkedNode<T>) -> Void) {
+        for node in self {
+            visitor(node)
+        }
+    }
 }

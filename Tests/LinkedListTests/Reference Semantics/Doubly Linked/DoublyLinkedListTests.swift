@@ -352,6 +352,34 @@ final class DoublyLinkedListTests: XCTestCase {
         let sutB = sutA
         XCTAssertEqual(sutA, sutB)
     }
+
+    /// Validates that `traverse(visit:)` does not call `visitor` when the queue is empty.
+    func test_traverse_from_empty_list() throws {
+        let sut = fixture.makeSUT()
+        var count = 0
+
+        sut.traverse { _ in
+            count += 1
+        }
+
+        XCTAssertEqual(count, 0)
+    }
+
+    /// Validates that `traverse(visit:)` calls `visitor` the expected number of times.
+    func test_traverse_from_non_empty_list() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedCount = numbers.count
+        var index = 0
+
+        let sut = fixture.makeAppendSUT(from: numbers)
+
+        sut.traverse { node in
+            XCTAssertEqual(node.value, numbers[index])
+            index += 1
+        }
+
+        XCTAssertEqual(index, expectedCount)
+    }
 }
 
 private extension LinkedListFixture {
