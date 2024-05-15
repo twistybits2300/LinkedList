@@ -214,4 +214,45 @@ final class ClassLinkedList_DeletionTests: XCTestCase {
         XCTAssertEqual(sut.tail?.value, expectedTailValue)
         XCTAssertEqual(returnedValue, expectedReturnedValue)
     }
+    
+    /// Validates that `removeFirst` throws as error if the list is empty.
+    func test_removeFirst_empty() throws {
+        let sut = fixture.makeEmptyListSUT()
+        XCTAssertThrowsError(try sut.removeFirst())
+    }
+    
+    /// Validates that `removeFirst()` leaves an empty list after removing the only node in a list.
+    func test_removeFirst_leaves_empty_list() throws {
+        let expectedReturnedValue = fixture.randomNumber
+        let sut = fixture.makeListSUT(expectedReturnedValue)
+        let returnedValue = try sut.removeFirst()
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
+    }
+    
+    /// Validates that `removeFirst()` can remove the head in a two-node list.
+    func test_removeFirst_head_two_nodes() throws {
+        let numbers = fixture.randomNumbers(count: 2)
+        let expectedReturnedValue = numbers[0]
+        let expectedHeadValue = numbers[1]
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let returnedValue = try sut.removeFirst()
+        XCTAssertEqual(sut.head?.value, expectedHeadValue)
+        XCTAssertEqual(sut.head, sut.tail)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
+    }
+    
+    /// Validates that `removeFirst` can remove the head of a multi-node list.
+    func test_removeFirst() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedReturnedValue = numbers[0]
+        let expectedHeadValue = numbers[1]
+        let expectedTailValue = numbers[numbers.count - 1]
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let returnedValue = try sut.removeFirst()
+        XCTAssertEqual(sut.head?.value, expectedHeadValue)
+        XCTAssertEqual(sut.tail?.value, expectedTailValue)
+        XCTAssertEqual(returnedValue, expectedReturnedValue)
+    }
 }

@@ -3,6 +3,7 @@ import Foundation
 extension ClassLinkedList {
     /// Removes the node at the given `index`.
     /// - Parameter index: The index of the node to be removed.
+    /// - Returns: The value of the removed node.
     /// - Throws: `LinkedListError`
     /// `LinkedListError`s thrown:
     /// - `.unableToRemoveNode` when attempting this operation on an empty list.
@@ -34,7 +35,6 @@ extension ClassLinkedList {
         var previousNode = head
         var count = 0
         
-        //while count < index - 1, let nextNode = previousNode?.next {
         while count < index, let nextNode = previousNode?.next {
             if count == index - 1 {
                 if nextNode.next == nil {
@@ -61,6 +61,7 @@ extension ClassLinkedList {
     
     /// Removes the given `node` from the list.
     /// - Parameter node: The node to be removed.
+    /// - Returns: The value of the removed node.
     /// - Throws: `LinkedListError`
     /// `LinkedListErrors` thrown:
     /// - `unableToRemoveNode` if the list is empty
@@ -107,5 +108,22 @@ extension ClassLinkedList {
         }
         
         throw LinkedListError.unknownNode
+    }
+    
+    /// Removes the first node in the list.
+    /// - Returns: The value of the removed node.
+    public func removeFirst() throws -> T? {
+        guard let head = self.head else {
+            throw LinkedListError.unableToRemoveNode
+        }
+        
+        let removedValue = head.value
+        self.head = head.next
+
+        if self.head == nil {
+            self.tail = nil
+        }
+        
+        return removedValue
     }
 }
