@@ -36,7 +36,7 @@ Reference and value semantics implementations of a linked list.
     - [x] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
 
 8. **Reverse**:
-    - [ ] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.
+    - [x] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.
 
 ```
 
