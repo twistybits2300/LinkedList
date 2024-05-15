@@ -100,7 +100,38 @@ final class EnumLinkedListTests: XCTestCase {
         let sut = EnumLinkedList(node: headNode)
         XCTAssertEqual(try sut.node(at: index)?.currentValue, expectedValue)
     }
+
+    /// Validates that `find(:)` returns `nil` when the list is empty.
+    func test_find_empty() throws {
+        let sut = List.empty
+        XCTAssertNil(sut.find(999))
+    }
     
+    /// Validates that `find(:)` returns `nil` if the value isn't in the list.
+    func test_find() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        let expectedValue = numbers[index]
+        let sut = fixture.makeListSUT(numbers: numbers)
+        let result = try XCTUnwrap(sut.find(_: expectedValue))
+        XCTAssertEqual(result.currentValue, expectedValue)
+    }
+
+    /// Validates that `contains(:)` returns `nil` when the list is empty.
+    func test_contains_empty() throws {
+        let sut = List.empty
+        XCTAssertFalse(sut.contains(999))
+    }
+    
+    /// Validates that `contains(:)` returns `nil` if the value isn't in the list.
+    func test_contains() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        let expectedValue = numbers[index]
+        let sut = fixture.makeListSUT(numbers: numbers)
+        XCTAssertTrue(sut.contains(_: expectedValue))
+    }
+
     /// Validates that `insert(_:)` correctly inserts a value into an empty
     /// list.
     func test_insert_empty() throws {

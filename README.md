@@ -32,8 +32,8 @@ Reference and value semantics implementations of a linked list.
     - [x] `removeAll()`: Removes all nodes from the list.
 
 7. **Searching**:
-    - [ ] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
-    - [ ] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
+    - [x] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
+    - [x] `find(_ value: T) -> ListNode<T>?`: Returns the node containing the specified value, if it exists.
 
 8. **Reverse**:
     - [ ] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.

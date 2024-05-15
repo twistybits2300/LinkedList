@@ -155,6 +155,30 @@ public enum EnumLinkedList<T> {
 }
 
 extension EnumLinkedList where T: Equatable {
+    /// Searches through the list to find the given `value`.
+    /// - Parameter value: The value to be found
+    /// - Returns: The node containing the `value`; `nil` if not found.
+    public func find(_ value: T) -> EnumListNode<T>? {
+        switch self {
+        case .headNode(let enumListNode):
+            return enumListNode.find(value)
+        case .empty:
+            return nil
+        }
+    }
+    
+    /// Returns `true` if the list contains the given `value`
+    /// - Parameter value: The value to be checked.
+    /// - Returns: `true` if `value` is found within the list; `false` otherwise.
+    public func contains(_ value: T) -> Bool {
+        switch self {
+        case .headNode(let enumListNode):
+            return enumListNode.contains(value)
+        case .empty:
+            return false
+        }
+    }
+
     /// Inserts the given `value` after the provided `afterNode`. `T` must be `Equatable`.
     /// - Parameters:
     ///   - value: The value to be inserted.
