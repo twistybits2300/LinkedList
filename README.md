@@ -17,7 +17,7 @@ Reference and value semantics implementations of a linked list.
 3. **Deletion**:
     - [x] `remove(at index: Int)`: Removes the node at a specific index.
     - [x] `remove(node: ListNode<T>)`: Removes a specified node from the list.
-    - [ ] `removeFirst()`: Removes the first node of the list.
+    - [x] `removeFirst()`: Removes the first node of the list.
     - [ ] `removeLast()`: Removes the last node of the list.
     - save this for when `traverse()` is available
     - [ ] `removeAll()`: Removes all nodes from the list.

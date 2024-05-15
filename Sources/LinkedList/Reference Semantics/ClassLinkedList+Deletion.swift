@@ -112,6 +112,7 @@ extension ClassLinkedList {
     
     /// Removes the first node in the list.
     /// - Returns: The value of the removed node.
+    /// - Throws: `LinkedListError.unableToRemoveNode` if attempting to remove from an empty list.
     public func removeFirst() throws -> T? {
         guard let head = self.head else {
             throw LinkedListError.unableToRemoveNode
@@ -124,6 +125,35 @@ extension ClassLinkedList {
             self.tail = nil
         }
         
+        return removedValue
+    }
+    
+    /// Removes the last node in the list.
+    /// - Returns: The value of the removed node.
+    /// - Throws: `LinkedListError.unableToRemoveNode` if attempting to remove from an empty list.
+    public func removeLast() throws -> T? {
+        guard let tail = self.tail else {
+            throw LinkedListError.unableToRemoveNode
+        }
+        
+        let removedValue = tail.value
+        var previousNode: ListNode<T>? = nil
+        var currentNode: ListNode<T>? = head
+
+        if head === tail {
+            /* only one node in the list */
+            self.head = nil
+            self.tail = nil
+            return removedValue
+        }
+        
+        while currentNode?.next != nil {
+            previousNode = currentNode
+            currentNode = currentNode?.next
+        }
+
+        previousNode?.next = nil
+        self.tail = previousNode
         return removedValue
     }
 }
