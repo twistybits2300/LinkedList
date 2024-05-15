@@ -2,11 +2,23 @@ import XCTest
 @testable import LinkedList
 
 final class LinkedListTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+}
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+struct LinkedListFixture {
+    static var randomRange: Range<Int> {
+        0..<100
+    }
+    
+    var randomNumber: Int {
+        Int.random(in: Self.randomRange)
+    }
+    
+    func randomNumbers(count: Int = 10,
+                       range: Range<Int> = Self.randomRange) -> [Int] {
+        var working = [Int]()
+        for _ in 0..<count {
+            working.append(randomNumber)
+        }
+        return working
     }
 }
