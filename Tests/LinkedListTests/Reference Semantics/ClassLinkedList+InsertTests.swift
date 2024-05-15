@@ -86,13 +86,13 @@ final class ClassLinkedList_InsertTests: XCTestCase {
         XCTAssertEqual(sut.asArray, expectedArray)
     }
     
-    /// Validates that `insert(_:after:)` can insert into an empty list.
+    /// Validates that `insert(_:after:)` throws and error when trying to
+    /// insert into an empty list.
     func test_insertAfter_empty() throws {
         let expectedValue = fixture.randomNumber
         let bogusNode = fixture.makeBogusListNode()
         let sut = fixture.makeEmptyListSUT()
-        try sut.insert(expectedValue, after: bogusNode)
-        XCTAssertEqual(sut.head?.value, expectedValue)
+        XCTAssertThrowsError(try sut.insert(expectedValue, after: bogusNode))
     }
     
     /// Validates that `insert(_:after:)` can insert into the head of the list.
@@ -140,10 +140,9 @@ final class ClassLinkedList_InsertTests: XCTestCase {
         print("      numbers: \(numbers)")
 
         let index = numbers.count / 2
-        //print("        index: \(index)")
         print("   numbers[\(index)]: \(numbers[index])")
         var expectedArray = numbers
-        expectedArray.insert(expectedValue, at: index)
+        expectedArray.insert(expectedValue, at: index + 1)
         print("expectedArray: \(expectedArray)")
         
         let sut = fixture.makeListSUT(numbers: numbers)

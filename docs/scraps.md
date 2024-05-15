@@ -23,6 +23,43 @@
 ```
 
 ```swift
+    public func insert2(_ value: T, after: ListNode<T>) throws {
+        let newNode = ListNode(value)
+        
+        if let head = self.head {
+            if after == head {
+                /* inserting at head */
+                newNode.next = after.next
+                head.next = newNode
+            } else {
+                var currentNode = head
+                
+                while let nextNode = currentNode.next {
+                    if nextNode == after {
+                        if nextNode.next == nil {
+                            /* inserting at tail */
+                            newNode.next = nextNode.next
+                            nextNode.next = newNode
+                            return
+                        } else {
+                            print("currentNode: \(currentNode.value)")
+                            print("   nextNode: \(nextNode.value)")
+                            newNode.next = nextNode
+                            currentNode.next = newNode
+                            return
+                        }
+                    }
+                    currentNode = nextNode
+                }
+                
+                throw LinkedListError.unknownNode
+            }
+        } else {
+            /* inserting into empty list */
+            self.head = newNode
+        }
+    }
+    
 ```
 
 ```swift
