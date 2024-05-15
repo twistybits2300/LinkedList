@@ -31,6 +31,10 @@ extension LinkedListFixture {
         return ClassLinkedList(head: node)
     }
     
+    func makeListRandomNumbersSUT() -> ClassLinkedList<Int> {
+        makeListSUT(numbers: randomNumbers())
+    }
+    
     func makeListSUT(numbers: [Int]) -> ClassLinkedList<Int> {
         let sut = makeEmptyListSUT()
         for number in numbers {

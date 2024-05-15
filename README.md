@@ -11,11 +11,11 @@ Reference and value semantics implementations of a linked list.
 2. **Insertion**:
     - [x] `append(_ value: T)`: Inserts a new node at the end of the list.
     - [x] `insert(_ value: T, at index: Int)`: Inserts a new node at a specific index.
-    - [ ] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
-    - [ ] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
+    - [x] `insert(_ value: T, after: ListNode<T>)`: Inserts a new node after a specified node.
+    - [x] `insert(_ value: T, before: ListNode<T>)`: Inserts a new node before a specified node.
 
 3. **Deletion**:
-    - [ ] `remove(at index: Int)`: Removes the node at a specific index.
+    - [x] `remove(at index: Int)`: Removes the node at a specific index.
     - [ ] `remove(node: ListNode<T>)`: Removes a specified node from the list.
     - [ ] `removeLast()`: Removes the last node of the list.
     - [ ] `removeAll()`: Removes all nodes from the list.
