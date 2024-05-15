@@ -26,10 +26,10 @@ Reference and value semantics implementations of a linked list.
     - [x] `count() -> Int`: Returns the number of nodes in the list.
 
 6. **Deletion**:
-    - [ ] `remove(at index: Int)`: Removes the node at a specific index.
-    - [ ] `remove(node: ListNode<T>)`: Removes a specified node from the list.
-    - [ ] `removeLast()`: Removes the last node of the list.
-    - [ ] `removeAll()`: Removes all nodes from the list.
+    - [x] `remove(at index: Int)`: Removes the node at a specific index.
+    - [x] `remove(node: ListNode<T>)`: Removes a specified node from the list.
+    - [x] `removeLast()`: Removes the last node of the list.
+    - [x] `removeAll()`: Removes all nodes from the list.
 
 7. **Searching**:
     - [ ] `contains(_ value: T)`: Checks whether the list contains a node with the specified value.
