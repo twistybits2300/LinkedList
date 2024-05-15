@@ -52,6 +52,11 @@ extension ClassLinkedList {
         return count
     }
     
+    /// Returns `true` if the list has no nodes; `false` otherwise.
+    public var isEmpty: Bool {
+        head == nil
+    }
+    
     var asArray: [T] {
         guard let head = head else {
             return []

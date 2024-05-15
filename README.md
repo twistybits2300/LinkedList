@@ -33,8 +33,8 @@ Reference and value semantics implementations of a linked list.
     - [x] `node(at index: Int) -> ListNode<T>?`: Returns the node at a specific index.
 
 7. **Utility**:
-    - [ ] `count() -> Int`: Returns the number of nodes in the list.
-    - [ ] `isEmpty() -> Bool`: Checks if the list is empty.
+    - [x] `count() -> Int`: Returns the number of nodes in the list.
+    - [x] `isEmpty() -> Bool`: Checks if the list is empty.
 
 8. **Reverse**:
     - [ ] `reverse()`: Reverses the order of the nodes in the list, particularly useful for singly linked lists.

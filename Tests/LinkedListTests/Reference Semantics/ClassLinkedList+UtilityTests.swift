@@ -81,6 +81,18 @@ final class ClassLinkedList_UtilityTests: XCTestCase {
         XCTAssertEqual(sut.count, expectedCount)
     }
     
+    /// Validates that `isEmpty` returns `true` when the list is empty.
+    func test_isEmpty_true() throws {
+        let sut = fixture.makeEmptyListSUT()
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    /// Validates that `isEmpty` returns `false` when the list is not empty.
+    func test_isEmpty_false() throws {
+        let sut = fixture.makeListSUT(nodeCount: 1)
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
     // MARK: - Utilities
     private func nodeVisitor(node: ListNode<Int>) {
         didCallVisitor = true
