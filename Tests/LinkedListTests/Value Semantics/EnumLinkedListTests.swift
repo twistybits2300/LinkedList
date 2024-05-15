@@ -163,6 +163,29 @@ final class EnumLinkedListTests: XCTestCase {
         XCTAssertNil(sut.head)
     }
     
+    /// Validates that `removeAll` removes all of the nodes in a list.
+    func test_removeAll() throws {
+        var sut = fixture.makeListSUT()
+        sut.removeAll()
+        XCTAssertNil(sut.head)
+    }
+    
+    /// Validates that `reverse()` does nothing on an empty list.
+    func test_reverse_empty() throws {
+        var sut = List.empty
+        sut.reverse()
+    }
+    
+    /// Validates that `reverse()` works as expected.
+    func test_reverse() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedArray = Array(numbers.reversed())
+        var sut = fixture.makeListSUT(numbers: numbers)
+        sut.reverse()
+        let headNode = try XCTUnwrap(sut.head)
+        XCTAssertEqual(headNode.asArray, expectedArray)
+    }
+
     /// Validates that `insert(_:at:)` can insert a value into an empty list.
     func test_insertAt_empty() throws {
         let expectedValue = fixture.randomNumber
@@ -333,13 +356,6 @@ final class EnumLinkedListTests: XCTestCase {
         let targetNode = try XCTUnwrap(try sut.node(at: index))
         try sut.remove(node: targetNode)
         XCTAssertEqual(sut.head?.asArray, expectedArray)
-    }
-    
-    /// Validates that `removeAll` removes all of the nodes in a list.
-    func test_removeAll() throws {
-        var sut = fixture.makeListSUT()
-        sut.removeAll()
-        XCTAssertNil(sut.head)
     }
 }
 

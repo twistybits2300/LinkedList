@@ -66,7 +66,7 @@ public enum EnumLinkedList<T> {
     /// Returns the node at the given `index`, starting from the list head.
     /// - Parameter index: The index of the node desired.
     /// - Returns: The node at the given `index`.
-    /// - Throws: `LinkedListError.invalidIndex(index)` if the given `index` is 
+    /// - Throws: `LinkedListError.invalidIndex(index)` if the given `index` is
     /// not valid.
     public func node(at index: Int) throws -> EnumListNode<T>? {
         switch self {
@@ -93,7 +93,7 @@ public enum EnumLinkedList<T> {
     /// - Parameters:
     ///   - value: The value to be inserted.
     ///   - index: The index of where to insert the value.
-    ///  - Throws: `LinkedListError.invalidIndex(index)` if the end of the list 
+    ///  - Throws: `LinkedListError.invalidIndex(index)` if the end of the list
     ///  is reached before the given `index`.
     public mutating func insert(_ value: T, at index: Int) throws {
         switch self {
@@ -151,6 +151,17 @@ public enum EnumLinkedList<T> {
     /// Removes all of the nodes from the list.
     public mutating func removeAll() {
         self = .empty
+    }
+    
+    /// Reverses the list.
+    mutating func reverse() {
+        switch self {
+        case .headNode(var headNode):
+            headNode.reverse()
+            self = .headNode(headNode)
+        case .empty:
+            break
+        }
     }
 }
 

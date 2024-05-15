@@ -37,4 +37,19 @@ extension EnumListNode {
         
         return working
     }
+    
+    /// Reverses the list.
+    mutating func reverse() {
+        var previous: EnumListNode<T>? = nil
+        var current: EnumListNode? = self
+        
+        while let currentNode = current {
+            let nextNode = currentNode.next
+            current = .value(currentNode.currentValue, next: previous)
+            previous = current
+            current = nextNode
+        }
+        
+        self = previous ?? self // In case the list was empty, don't change it
+    }
 }
