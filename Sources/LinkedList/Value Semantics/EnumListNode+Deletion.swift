@@ -45,6 +45,28 @@ extension EnumListNode {
         /* if we made it to here it means the index was not valid */
         throw LinkedListError.invalidIndex(index)
     }
+    
+    /// Remove the last node from the list.
+    /// - Throws: When attempting to remove a list with only one node.
+    public mutating func removeLast() throws {
+        guard self.next != nil else {
+            throw LinkedListError.unableToRemoveNode
+        }
+        
+        var current: EnumListNode<T>? = self
+        var previous: EnumListNode<T>? = nil
+        var list = EnumListNode(currentValue)
+
+        while let nextNode = current?.next {
+            if previous != nil, let value = current?.currentValue {
+                list.insert(value)
+            }
+            previous = current
+            current = nextNode
+        }
+        
+        self = list
+    }
 }
 
 extension EnumListNode where T : Equatable {
@@ -66,8 +88,6 @@ extension EnumListNode where T : Equatable {
                     throw LinkedListError.unableToRemoveNode
                 }
             } else if currentNode.next == node {
-                print("         list: \(list.asArray)")
-                print("     removing: \(node.currentValue)")
                 if currentNode.next?.next == nil {
                     /* we're at the tail of the list */
                     self = list

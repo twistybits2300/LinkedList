@@ -351,6 +351,22 @@ final class EnumListNodeTests: XCTestCase {
         let bogusNode = EnumListNode(fixture.bogusNumber)
         XCTAssertThrowsError(try sut.remove(node: bogusNode))
     }
+    
+    /// Validates that `removeLast()` throws an error when trying to remove the
+    /// head node in a list with only one node.
+    func test_removeLast_head_failure() throws {
+        var sut = fixture.makeSUT(nodeCount: 1)
+        XCTAssertThrowsError(try sut.removeLast())
+    }
+    
+    /// Validates that `remove(last:)` works as expected.
+    func test_removeLast_success() throws {
+        let numbers = fixture.randomNumbers()
+        let expectedArray = Array(numbers.dropLast())
+        var sut = fixture.makeSUT(numbers: numbers)
+        try sut.removeLast()
+        XCTAssertEqual(sut.asArray, expectedArray)
+    }
 }
 
 private struct Default {
