@@ -222,6 +222,24 @@ final class EnumListNodeTests: XCTestCase {
         let lastNumber = try XCTUnwrap(sut.last?.currentValue)
         XCTAssertEqual(lastNumber, expectedValue)
     }
+    
+    /// Validates that `node(at:)` returns the expected value.
+    func test_nodeAt_success() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count / 2
+        let expectedValue = numbers[index]
+        let sut = fixture.makeSUT(numbers: numbers)
+        let returnedNode = try sut.node(at: index)
+        XCTAssertEqual(returnedNode.currentValue, expectedValue)
+    }
+    
+    /// Validates that `node(at:)` throws an error when given an invalid `index`.
+    func test_nodeAt_failure() throws {
+        let numbers = fixture.randomNumbers()
+        let index = numbers.count + 1
+        let sut = fixture.makeSUT(numbers: numbers)
+        XCTAssertThrowsError(try sut.node(at: index))
+    }
 
     // MARK: - Utilities
     private func debug(_ sut: EnumListNode<Int>) {
@@ -268,20 +286,5 @@ private extension EnumListNode {
         }
         
         return working
-    }
-    
-    func node(at index: Int) -> EnumListNode<T>? {
-        var currentNode: EnumListNode<T>? = self
-        var count = 0
-        
-        while count <= index, currentNode != nil {
-            if count == index {
-                return currentNode
-            }
-            count = count + 1
-            currentNode = currentNode?.next
-        }
-        
-        return nil
     }
 }

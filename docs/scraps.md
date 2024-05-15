@@ -29,32 +29,18 @@
 ```
 
 ```swift
-/* incorrect */
-public mutating func insert(_ value: T, at index: Int) throws {
-    if index == 0 {
-        self = .value(value, next: self)
-    } else {
-        var currentIndex = 0
-        var currentNode = self
-        var previousNode: EnumListNode<T>?
+    public func node(at index: Int) -> EnumListNode<T>? {
+        var currentNode: EnumListNode<T>? = self
+        var count = 0
         
-        while currentIndex < index {
-            if let nextNode = currentNode.next {
-                previousNode = currentNode
-                currentNode = nextNode
-                currentIndex += 1
-            } else {
-                /* we're at the end of the list before reaching
-                 the index, which is an error */
-                throw LinkedListError.invalidIndex(index)
+        while count <= index, currentNode != nil {
+            if count == index {
+                return currentNode
             }
+            count = count + 1
+            currentNode = currentNode?.next
         }
         
-        let newNode = EnumListNode(value, next: currentNode)
-        if let previous = previousNode {
-            previous.next = newNode
-            /* */
-        }
+        return nil
     }
-}
 ```
